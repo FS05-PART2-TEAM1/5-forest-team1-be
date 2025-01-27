@@ -7,8 +7,8 @@ import {
 
 const router = express.Router();
 
-router.get("/:studyId/reactions", getReactions);
-router.post("/:studyId/reactions", createReaction);
-router.patch("/reactions/:reactionId", updateReaction);
+router.get("/", getReactions);
+router.post("/", createReaction);
+router.patch("/:reactionId", updateReaction);
 
 export default router;

@@ -8,9 +8,9 @@ import {
 
 const router = express.Router();
 
-router.get("/:studyId/habits", getHabits);
-router.post("/:studyId/habits", createHabit);
-router.delete("/habits/:habitId", deleteHabit);
-router.patch("/habits/:habitId", updateHabit);
+router.get("/", getHabits);
+router.post("/", createHabit);
+router.delete("/:habitId", deleteHabit);
+router.patch("/:habitId", updateHabit);
 
 export default router;
