@@ -1,9 +1,14 @@
 import express from "express";
-const router = express.Router();
-import reactionController from "./reaction.controller";
+import {
+  getReactions,
+  createReaction,
+  updateReaction,
+} from "./reaction.controller.js";
 
-router.get("/:studyId/reactions", reactionController.getReactions);
-router.post("/:studyId/reactions", reactionController.createReaction);
-router.patch("/reactions/:reactionId", reactionController.updateReaction);
+const router = express.Router();
+
+router.get("/:studyId/reactions", getReactions);
+router.post("/:studyId/reactions", createReaction);
+router.patch("/reactions/:reactionId", updateReaction);
 
 export default router;

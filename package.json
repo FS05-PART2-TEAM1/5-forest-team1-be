@@ -1,12 +1,13 @@
 {
   "name": "express-prisma-backend",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node prisma/app.js",
+    "dev": "nodemon prisma/app.js",
     "build": "npm install",
-    "seed": "node --experimental-modules prisma/seed.js"
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^6.2.1",

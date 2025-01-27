@@ -1,10 +1,16 @@
 import express from "express";
-const router = express.Router();
-import habitController from "./habit.controller";
+import {
+  getHabits,
+  createHabit,
+  deleteHabit,
+  updateHabit,
+} from "./habit.controller.js";
 
-router.get("/:studyId/habits", habitController.getHabits);
-router.post("/:studyId/habits", habitController.createHabit);
-router.delete("/habits/:habitId", habitController.deleteHabit);
-router.patch("/habits/:habitId", habitController.updateHabit);
+const router = express.Router();
+
+router.get("/:studyId/habits", getHabits);
+router.post("/:studyId/habits", createHabit);
+router.delete("/habits/:habitId", deleteHabit);
+router.patch("/habits/:habitId", updateHabit);
 
 export default router;

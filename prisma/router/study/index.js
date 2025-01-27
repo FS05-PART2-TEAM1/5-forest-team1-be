@@ -1,12 +1,20 @@
 import express from "express";
-const router = express.Router();
-import studyController from "./study.controller";
+import {
+  getAllStudies,
+  createStudy,
+  getStudyById,
+  updateStudy,
+  deleteStudy,
+  getStudyPoints,
+} from "./study.controller.js";
 
-router.get("/", studyController.getAllStudies);
-router.post("/", studyController.createStudy);
-router.get("/:studyId", studyController.getStudyById);
-router.patch("/:studyId", studyController.updateStudy);
-router.delete("/:studyId", studyController.deleteStudy);
-router.get("/:studyId/points", studyController.getStudyPoints);
+const router = express.Router();
+
+router.get("/", getAllStudies);
+router.post("/", createStudy);
+router.get("/:studyId", getStudyById);
+router.patch("/:studyId", updateStudy);
+router.delete("/:studyId", deleteStudy);
+router.get("/:studyId/points", getStudyPoints);
 
 export default router;
