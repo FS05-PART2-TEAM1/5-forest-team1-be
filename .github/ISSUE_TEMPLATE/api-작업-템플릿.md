@@ -1,7 +1,7 @@
 ---
 name: API 작업 템플릿
 about: API 체크리스트가 포함된 이슈 템플릿
-title: ''
+title: "[Back-API] "
 labels: enhancement
 assignees: ''
 
