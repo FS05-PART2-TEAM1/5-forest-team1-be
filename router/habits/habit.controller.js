@@ -1,8 +1,8 @@
 import habitService from "./habit.service";
 
-export const deleteHabit = async (req, res) => {
+export const removeHabitById = async (req, res) => {
     try {
-        await habitService.deleteHabit(req.query.id);
+        await habitService.removeHabitById(req.query.habitId);
         res.status(200).send({message : "habit 삭제 완료!"});
     } catch (err) {
         if(err.code === 'P2025') {
