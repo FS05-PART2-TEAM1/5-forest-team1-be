@@ -1,7 +1,7 @@
 import express from "express";
-const router = express.Router();
+import studyRouter from "./studies/index.js";
 
-import studyRouter from "./studies";
+const router = express.Router();
 
 router.use("/studies", studyRouter);
 
