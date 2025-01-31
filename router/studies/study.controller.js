@@ -19,7 +19,7 @@ export const fetchAllStudies = async (req, res) => {
 /// 스터디 수정 API
 export const updateStudy = async (req, res) => {
   const { studyId } = req.params;
-  const { name, password, description, backgroundIrl, points } = req.body;
+  const { name, description, backgroundIrl } = req.body;
 
   try {
     const result = await studyService.updateStudy(
