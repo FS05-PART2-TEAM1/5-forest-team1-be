@@ -17,7 +17,7 @@ export const fetchAllStudies = async (req, res) => {
 };
 
 /// 스터디 수정 API
-export const uapdateStudy = async (req, res) => {
+export const updateStudy = async (req, res) => {
   const { studyId } = req.params;
   const { name, password, description, backgroundIrl, points } = req.body;
 
