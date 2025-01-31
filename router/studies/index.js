@@ -1,7 +1,7 @@
 import express from "express";
 import {
   fetchAllStudies,
-  // createStudy,
+  addStudy,
   // getStudyById,
   // updateStudy,
   // deleteStudy,
@@ -14,7 +14,7 @@ import {
 const router = express.Router();
 
 router.get("/", fetchAllStudies);
-// router.post("/", createStudy);
+router.post("/", addStudy);
 // router.get("/:studyId", getStudyById);
 // router.patch("/:studyId", updateStudy);
 // router.delete("/:studyId", deleteStudy);

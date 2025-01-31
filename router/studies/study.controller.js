@@ -15,3 +15,21 @@ export const fetchAllStudies = async (req, res) => {
     res.status(500).send({ error: "스터디 목록을 가져오는데 실패했습니다." });
   }
 };
+
+export const addStudy = async (req, res) => {
+  const { name, password, passwordConfirm, description, backgroundImageUrl } =
+    req.body;
+  try {
+    const result = await studyService.addStudy({
+      name,
+      password,
+      passwordConfirm,
+      description,
+      backgroundImageUrl,
+    });
+    res.status(200).send(result);
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).send({ error: err.message });
+  }
+};
