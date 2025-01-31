@@ -53,8 +53,17 @@ export const fetchAllStudies = async (
   };
 };
 
+const existStudyById = async (id) => {
+  return Boolean(
+    await prisma.study.findUnique({
+      where: { id },
+    })
+  );
+};
+
 const studyService = {
   fetchAllStudies,
+  existStudyById,
 };
 
 export default studyService;
