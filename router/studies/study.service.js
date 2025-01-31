@@ -53,8 +53,44 @@ export const fetchAllStudies = async (
   };
 };
 
+/// 스터디 수정 서비스 함수
+export const updateStudy = async (
+  studyId,
+  name,
+  description,
+  backgroundUrl
+) => {
+  try {
+    const study = await prisma.study.findUnique({
+      where: { id: studyId },
+    });
+
+    if (!study) {
+      return null;
+    }
+
+    const updateData = {};
+    if (name) updateData.name = name;
+
+    if (description) updateData.description = description;
+
+    if (backgroundUrl) updateData.backgroundUrl = backgroundUrl;
+
+    const updatedStudy = await prisma.study.update({
+      where: { id: studyId },
+      data: updateData,
+    });
+
+    return updatedStudy;
+  } catch (err) {
+    console.error("스터디 수정 중 오류 발생", err);
+    throw err;
+  }
+};
+
 const studyService = {
   fetchAllStudies,
+  updateStudy,
 };
 
 export default studyService;
