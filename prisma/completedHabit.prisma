@@ -1,12 +1,10 @@
 model CompletedHabit {
-  id          String   @id @default(uuid())
-  studyId     String
-  habitId     String
-  completedAt DateTime
+  id        String   @id @default(uuid())
+  habitId   String
+  date      DateTime
+  status    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  ///study Study @relation(fields: [studyId], references: [id], onDelete: Cascade)
-  ///  habit Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
-
-  @@index([studyId])
-  @@index([habitId])
+  @@unique([habitId, date])
 }

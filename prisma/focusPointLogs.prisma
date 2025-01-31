@@ -2,9 +2,9 @@ model FocusPointLogs {
   id         String   @id @default(uuid())
   studyId    String
   points     Int
+  focusTime  Int
   startedAt  DateTime
   finishedAt DateTime
-  duration   Int
   createdAt  DateTime @default(now())
 
   @@index([studyId])
