@@ -53,10 +53,13 @@ export const fetchAllStudies = async (
   };
 };
 
-export const addStudy = async (studyData) => {
-  const { name, password, passwordConfirm, description, backgroundImageUrl } =
-    studyData;
-
+export const addStudy = async (
+  name,
+  description,
+  backgroundImageUrl,
+  password,
+  passwordConfirm
+) => {
   if (password !== passwordConfirm) {
     throw new Error("비밀번호가 일치하지 않습니다.");
   }
