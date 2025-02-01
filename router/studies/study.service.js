@@ -41,6 +41,14 @@ export const fetchAllStudies = async (
     orderBy,
     skip,
     take,
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      points: true,
+      createdAt: true,
+      updatedAt: true,
+    },
   });
 
   const total = await prisma.study.count({ where });
