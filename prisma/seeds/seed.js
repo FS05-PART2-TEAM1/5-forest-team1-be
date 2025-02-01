@@ -11,11 +11,12 @@ async function main() {
       data: study,
     });
   }
+
   const fetchedStudies = await prisma.study.findMany();
+  let idx = 0;
+  let cnt = 0;
+  let studyId = "";
   for (const reaction of reactions) {
-    let studyId = "";
-    let idx = 0;
-    let cnt = 0;
     if (fetchedStudies.length > idx) studyId = fetchedStudies[idx].id;
     await prisma.reaction.create({
       data: { ...reaction, studyId },
