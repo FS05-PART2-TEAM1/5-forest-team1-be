@@ -20,19 +20,19 @@ export const addStudy = async (req, res) => {
   const { name, password, passwordConfirm, description, backgroundImageUrl } =
     req.body;
 
+  if (password !== passwordConfirm) {
+    return res.status(400).send({ error: "비밀번호가 일치하지 않습니다." });
+  }
+
   try {
     const result = await studyService.addStudy(
       name,
       description,
       backgroundImageUrl,
-      password,
-      passwordConfirm
+      password
     );
-    res.status(201).send(result); // 201 Created 상태 코드 사용
+    res.status(201).send(result);
   } catch (err) {
-    if (password !== passwordConfirm) {
-      return res.status(400).send({ error: "비밀번호가 일치하지 않습니다." });
-    }
     res.status(500).send({ error: "스터디 생성에 실패했습니다." });
   }
 };

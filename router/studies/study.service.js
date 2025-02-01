@@ -1,5 +1,6 @@
 import prisma from "../../prismaClient.js";
 
+// 스터디 목록 조회
 export const fetchAllStudies = async (
   page = 1,
   pageSize = 6,
@@ -53,6 +54,7 @@ export const fetchAllStudies = async (
   };
 };
 
+// 스터디 만들기
 export const addStudy = async (
   name,
   description,
