@@ -1,21 +1,32 @@
 import prisma from '../../prismaClient.js';
 
-const removeHabitById = async (habitId) => {
-    const now = new Date();
+const deleteHabitById = async (deletedAt, habitId) => {
     await prisma.habit.update({
         where: {
             id: habitId,
         },
         data: {
-            deletedAt: now,
+            deletedAt: deletedAt,
         },
     })
 }
 
+const updateHabitById = async (name, updatedAt, habitId) => {
+    await prisma.habit.update({
+        where: {
+            id: habitId,
+        },
+        data: {
+            updatedAt: updatedAt,
+            name: name,
+        }
+    })
+}
 
 
 const habitService = {
-    removeHabitById,
+    updateHabitById,
+    deleteHabitById,
 }
 
 export default habitService;
