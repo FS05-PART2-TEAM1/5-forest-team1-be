@@ -57,13 +57,8 @@ export const addStudy = async (
   name,
   description,
   backgroundImageUrl,
-  password,
-  passwordConfirm
+  password
 ) => {
-  if (password !== passwordConfirm) {
-    throw new Error("비밀번호가 일치하지 않습니다.");
-  }
-
   const study = await prisma.study.create({
     data: {
       name,

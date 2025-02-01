@@ -30,8 +30,8 @@ export const addStudy = async (req, res) => {
     );
     res.status(201).send(result); // 201 Created 상태 코드 사용
   } catch (err) {
-    if (err.message === "비밀번호가 일치하지 않습니다.") {
-      return res.status(400).send({ error: err.message });
+    if (password !== passwordConfirm) {
+      return res.status(400).send({ error: "비밀번호가 일치하지 않습니다." });
     }
     res.status(500).send({ error: "스터디 생성에 실패했습니다." });
   }
