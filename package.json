@@ -4,8 +4,8 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node prisma/app.js",
-    "dev": "nodemon prisma/app.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "build": "npm install",
     "seed": "node prisma/seed.js"
   },
