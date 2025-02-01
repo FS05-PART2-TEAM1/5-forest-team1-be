@@ -11,13 +11,12 @@ const deleteHabitById = async (deletedAt, habitId) => {
     })
 }
 
-const updateHabitById = async (name, updatedAt, habitId) => {
+const updateHabitById = async (name, habitId) => {
     await prisma.habit.update({
         where: {
             id: habitId,
         },
         data: {
-            updatedAt: updatedAt,
             name: name,
         }
     })

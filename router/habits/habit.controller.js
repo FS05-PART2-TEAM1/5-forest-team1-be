@@ -3,9 +3,9 @@ import habitService from "./habit.service.js";
 export const modifyHabitById = async (req, res) => {
     try {
         const habitId = req.params.habitId;
-        const { name, updatedAt, deletedAt} = req.body; 
+        const { name, deletedAt} = req.body; 
         if(deletedAt) await habitService.deleteHabitById(deletedAt, habitId);
-        if(updatedAt) await habitService.updateHabitById(name, updatedAt, habitId);
+        if(name) await habitService.updateHabitById(name, habitId);
          res.status(200).send({ message : "habit 수정 완료."})
     } catch (err) {
         if(err.code === 'P2025') {
