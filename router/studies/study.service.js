@@ -1,6 +1,7 @@
 import prisma from "../../prismaClient.js";
+import bcrypt from "bcrypt";
 
-// 스터디 목록 조회
+/// 스터디 목록 조회
 export const fetchAllStudies = async (
   page = 1,
   pageSize = 6,
@@ -54,17 +55,20 @@ export const fetchAllStudies = async (
   };
 };
 
-// 스터디 만들기
+/// 스터디 만들기
 export const addStudy = async (
   name,
   description,
   backgroundImageUrl,
   password
 ) => {
+  /// 비밀번호 해싱 처리 (saltRounds = 10)
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const study = await prisma.study.create({
     data: {
       name,
-      password,
+      password: hashedPassword,
       description,
       backgroundImageUrl,
     },
