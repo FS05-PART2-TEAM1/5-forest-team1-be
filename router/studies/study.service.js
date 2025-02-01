@@ -45,8 +45,23 @@ export const fetchAllStudies = async (
 
   const total = await prisma.study.count({ where });
 
+  const studyIds = studies.map((study) => study.id);
+
+  const reactions = await prisma.reaction.findMany({
+    where: {
+      studyId: {
+        in: studyIds,
+      },
+    },
+  });
+
+  const studiesWithReactions = studies.map((study) => ({
+    ...study,
+    reactions: reactions.filter((reaction) => reaction.studyId === study.id),
+  }));
+
   return {
-    studies,
+    studies: studiesWithReactions,
     total,
     currentPage: Number(page),
     totalPages: Math.ceil(total / Number(pageSize)),

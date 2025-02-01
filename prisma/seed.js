@@ -2,12 +2,26 @@ import prisma from "../prismaClient.js";
 import { studies } from "./seeds/seed.study.js";
 
 async function main() {
+  await prisma.reaction.deleteMany({});
   await prisma.study.deleteMany({});
 
   for (const study of studies) {
-    await prisma.study.create({
-      data: study,
+    const { reactions, ...studyData } = study;
+
+    const createdStudy = await prisma.study.create({
+      data: studyData,
     });
+
+    if (reactions) {
+      for (const reaction of reactions) {
+        await prisma.reaction.create({
+          data: {
+            ...reaction,
+            studyId: createdStudy.id,
+          },
+        });
+      }
+    }
   }
 
   console.log("시드 데이터가 성공적으로 생성되었습니다.");
