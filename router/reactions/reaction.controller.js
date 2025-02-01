@@ -32,7 +32,21 @@ const addReaction = async (req, res) => {
   }
 };
 
-const modifyReaction = (req, res) => {};
+const modifyReaction = async (req, res) => {
+  const { studyId, reactionId } = req.params;
+  const { counts } = req.body;
+
+  try {
+    const reaction = await reactionService.modifyReactionById({
+      reactionId,
+      counts,
+    });
+    res.status(200).send({ studyId: studyId, reaction });
+  } catch (err) {
+    console.log(`Error in reactionController.modifyReaction :: ${err.message}`);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+};
 
 const reactionController = {
   fetchReactions,

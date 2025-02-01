@@ -10,12 +10,17 @@ const addReaction = async (data) => {
   });
 };
 
-const modifyReaction = () => {};
+const modifyReactionById = async ({ reactionId, counts }) => {
+  return await prisma.reaction.update({
+    where: { id: reactionId },
+    data: { counts },
+  });
+};
 
 const reactionService = {
   fetchReactionsByStudyId,
   addReaction,
-  modifyReaction,
+  modifyReactionById,
 };
 
 export default reactionService;
