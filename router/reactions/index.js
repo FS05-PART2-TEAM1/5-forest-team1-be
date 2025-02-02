@@ -1,14 +1,14 @@
-import express from "express";
-import {
-  getReactions,
-  createReaction,
-  updateReaction,
-} from "./reaction.controller.js";
+// import express from "express";
+// import {
+//   getReactions,
+//   createReaction,
+//   updateReaction,
+// } from "./reaction.controller.js";
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get("/", getReactions);
-router.post("/", createReaction);
-router.patch("/:reactionId", updateReaction);
+// router.get("/", getReactions);
+// router.post("/", createReaction);
+// router.patch("/:reactionId", updateReaction);
 
-export default router;
+// export default router;

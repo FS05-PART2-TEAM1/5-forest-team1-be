@@ -1,12 +1,11 @@
 import prisma from "../prismaClient.js";
-import { studies } from "./seeds/seed.study.js";
+import { dailyHabits } from "./seeds/seed.dailyHabits.js";
 
 async function main() {
-  await prisma.study.deleteMany({});
-
-  for (const study of studies) {
-    await prisma.study.create({
-      data: study,
+  await prisma.dailyHabit.deleteMany({});
+  for (const dailyHabit of dailyHabits) {
+    await prisma.dailyHabit.create({
+      data: dailyHabit,
     });
   }
 

@@ -6,5 +6,8 @@ model Habit {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
+  ///study     Study            @relation(fields: [studyId], references: [id], onDelete: Cascade)
+  ///  completed CompletedHabit[]
+
   @@index([studyId])
 }
