@@ -58,23 +58,13 @@ export const modifyStudy = async (
   studyId,
   name,
   description,
-  backgroundUrl
+  backgroundImageUrl
 ) => {
   try {
-    const study = await prisma.study.findUnique({
-      where: { id: studyId },
-    });
-
-    if (!study) {
-      return null;
-    }
-
     const modifyData = {};
     if (name) modifyData.name = name;
-
     if (description) modifyData.description = description;
-
-    if (backgroundUrl) modifyData.backgroundUrl = backgroundUrl;
+    if (backgroundImageUrl) modifyData.backgroundImageUrl = backgroundImageUrl;
 
     const result = await prisma.study.update({
       where: { id: studyId },
@@ -83,6 +73,9 @@ export const modifyStudy = async (
 
     return result;
   } catch (err) {
+    if (err.code === "P2025") {
+      return null;
+    }
     console.error("스터디 수정 중 오류 발생", err);
     throw err;
   }
