@@ -1,0 +1,10 @@
+model Study {
+  id                 String   @id @default(uuid())
+  name               String
+  password           String
+  description        String
+  backgroundImageUrl String
+  points             Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
