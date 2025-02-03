@@ -119,7 +119,7 @@ export const verifyPassword = async (studyId, password) => {
     throw new Error("스터디를 찾을 수 없습니다.");
   }
 
-  return bcrypt.compare(password, study.password);
+  return await bcrypt.compare(password, study.password);
 };
 
 const studyService = {
