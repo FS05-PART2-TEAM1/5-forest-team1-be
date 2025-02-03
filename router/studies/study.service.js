@@ -55,21 +55,14 @@ export const fetchAllStudies = async (
 
 export const removeStudy = async (studyId) => {
   try {
-    const study = await prisma.study.findUnique({
-      where: {
-        id: studyId,
-      },
-    });
-    if (!study) {
-      return null;
-    }
     const removed = await prisma.study.delete({
-      where: {
-        id: studyId,
-      },
+      where: { id: studyId },
     });
     return removed;
   } catch (err) {
+    if (err.code === "P2025") {
+      return null;
+    }
     console.error("스터디 삭제 중 오류 발생", err);
     throw err;
   }
