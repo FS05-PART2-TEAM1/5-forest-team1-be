@@ -7,15 +7,29 @@ async function main() {
   await prisma.reaction.deleteMany({});
 
   for (const study of studies) {
-    await prisma.study.create({
-      data: study,
+    const { reactions, ...studyData } = study;
+
+    const createdStudy = await prisma.study.create({
+      data: studyData,
     });
+
+    if (reactions) {
+      for (const reaction of reactions) {
+        await prisma.reaction.create({
+          data: {
+            ...reaction,
+            studyId: createdStudy.id,
+          },
+        });
+      }
+    }
   }
+
   const fetchedStudies = await prisma.study.findMany();
+  let idx = 0;
+  let cnt = 0;
+  let studyId = "";
   for (const reaction of reactions) {
-    let studyId = "";
-    let idx = 0;
-    let cnt = 0;
     if (fetchedStudies.length > idx) studyId = fetchedStudies[idx].id;
     await prisma.reaction.create({
       data: { ...reaction, studyId },
