@@ -7,4 +7,5 @@ model dailyHabit {
   updatedAt DateTime @updatedAt
 
   @@unique([habitId, dayOfWeek])
+  @@index([habitId])
 }
