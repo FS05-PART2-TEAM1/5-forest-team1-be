@@ -1,9 +1,10 @@
 model Habit {
-  id        String    @id @default(uuid())
-  studyId   String
-  name      String
-  deletedAt DateTime?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  @@index([studyId])
+    id        String    @id @default(uuid())
+    studyId   String
+    name      String
+    deletedAt DateTime?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+
+    @@index([studyId])
 }
