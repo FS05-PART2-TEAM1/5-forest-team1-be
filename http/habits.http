@@ -1,0 +1,4 @@
+GET http://localhost:5004/studies/40fc83b5-9615-444c-8997-64f40ed50cde/habits
+
+###
+GET http://localhost:5004/api/studies

@@ -8,6 +8,7 @@ export const studies = [
     createdAt: new Date("2024-01-01"),
   },
   {
+    id: "70c8c2ef-dca8-4667-924c-140cd339712b",
     name: "리액트 스터디",
     password: "password123",
     description: "리액트와 Next.js를 학습하는 스터디입니다.",

@@ -5,7 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node app.js",
+<<<<<<< Updated upstream
     "dev": "nodemon app.js",
+=======
+    "dev": " nodemon app.js",
+>>>>>>> Stashed changes
     "build": "npm install",
     "seed": "node prisma/seed.js"
   },
