@@ -48,15 +48,16 @@ export const verifyPassword = async (req, res) => {
 
   try {
     const isValid = await studyService.verifyPassword(studyId, password);
+
+    if (!isValid) {
+      return res.status(401).send({ error: "비밀번호가 일치하지 않습니다." });
+    }
+
     res.status(200).send({
-      isValid,
       message: "비밀번호가 확인되었습니다.",
     });
   } catch (err) {
-    if (
-      err.message === "비밀번호가 일치하지 않습니다." ||
-      err.message === "스터디를 찾을 수 없습니다."
-    ) {
+    if (err.message === "스터디를 찾을 수 없습니다.") {
       return res.status(401).send({
         error: err.message,
       });

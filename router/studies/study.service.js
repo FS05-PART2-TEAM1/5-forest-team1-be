@@ -119,13 +119,9 @@ export const verifyPassword = async (studyId, password) => {
     throw new Error("스터디를 찾을 수 없습니다.");
   }
 
-  const isPasswordValid = await bcrypt.compare(password, study.password);
-  if (!isPasswordValid) {
-    throw new Error("비밀번호가 일치하지 않습니다.");
-  }
-
-  return true;
+  return bcrypt.compare(password, study.password);
 };
+
 const studyService = {
   fetchAllStudies,
   addStudy,
