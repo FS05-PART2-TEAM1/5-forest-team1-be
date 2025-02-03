@@ -91,7 +91,6 @@ export const addStudy = async (
   const study = await prisma.study.create({
     data: {
       name,
-      password: hashedPassword,
       description,
       backgroundImageUrl,
     },

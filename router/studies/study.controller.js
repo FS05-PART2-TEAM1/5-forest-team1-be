@@ -28,8 +28,7 @@ export const addStudy = async (req, res) => {
     const result = await studyService.addStudy(
       name,
       description,
-      backgroundImageUrl,
-      password
+      backgroundImageUrl
     );
     res.status(201).send(result);
   } catch (err) {
