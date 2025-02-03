@@ -17,11 +17,11 @@ export const fetchAllStudies = async (req, res) => {
 };
 
 /// 스터디 삭제
-export const deleteStudy = async (req, res) => {
+export const removeStudy = async (req, res) => {
   const { studyId } = req.params;
 
   try {
-    const deleted = await studyService.deleteStudy(studyId);
+    const deleted = await studyService.removeStudy(studyId);
 
     if (!deleted) {
       return res.status(404).send({ error: "해당 스터디를 찾을 수 없습니다." });

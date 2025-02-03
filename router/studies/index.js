@@ -4,7 +4,7 @@ import {
   // createStudy,
   // getStudyById,
   // updateStudy,
-  deleteStudy,
+  removeStudy,
   // getStudyPoints,
 } from "./study.controller.js";
 // import habitRouter from "../habits/index.js";
@@ -17,7 +17,7 @@ router.get("/", fetchAllStudies);
 // router.post("/", createStudy);
 // router.get("/:studyId", getStudyById);
 // router.patch("/:studyId", updateStudy);
-router.delete("/:studyId", deleteStudy);
+router.delete("/:studyId", removeStudy);
 // router.get("/:studyId/points", getStudyPoints);
 
 // router.use("/:studyId/habits", habitRouter);
