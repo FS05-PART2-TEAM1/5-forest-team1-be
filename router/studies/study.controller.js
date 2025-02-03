@@ -1,4 +1,5 @@
 import studyService from "./study.service.js";
+import bcrypt from "bcrypt";
 
 export const fetchAllStudies = async (req, res) => {
   const { page, pageSize, keyword, sortBy } = req.query;
@@ -28,7 +29,8 @@ export const addStudy = async (req, res) => {
     const result = await studyService.addStudy(
       name,
       description,
-      backgroundImageUrl
+      backgroundImageUrl,
+      password
     );
     res.status(201).send(result);
   } catch (err) {
