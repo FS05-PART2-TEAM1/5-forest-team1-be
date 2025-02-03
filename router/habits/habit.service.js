@@ -1,12 +1,13 @@
 import prisma from '../../prismaClient.js';
 
 const modifyHabitById = async (habitId, data) => {
-    await prisma.habit.update({
+    const updatedHabit = await prisma.habit.update({
         where: {
             id: habitId,
         },
         data,
     })
+    return updatedHabit;
 }
 
 
