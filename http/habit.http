@@ -1,6 +1,6 @@
-POST http://localhost:5004/api/studies/hello/habits/test/check/today
+PATCH http://localhost:5004/api/studies/hello/habits/4304305e-a782-4601-b0bb-f26ad2bcabc4/
 Content-Type: application/json
 
 {
-    "status": true
+    "deletedAt": "2025-02-03T06:41:26.111Z"
 }

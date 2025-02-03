@@ -1,20 +1,20 @@
-import express from 'express';
-// import {
-//   fetchAllStudies,
-//   createStudy,
-//   getStudyById,
-//   updateStudy,
-//   deleteStudy,
-//   getStudyPoints,
-// } from "./study.controller.js";
-import habitRouter from '../habits/index.js';
-// import reactionRouter from "../reactions/index.js";
+import express from "express";
+import {
+  fetchAllStudies,
+  addStudy,
+  // getStudyById,
+  // updateStudy,
+  // deleteStudy,
+  // getStudyPoints,
+} from "./study.controller.js";
+// import habitRouter from "../habits/index.js";
+import reactionRouter from "../reactions/index.js";
 // import pointRouter from "../points/index.js";
 
 const router = express.Router();
 
-// router.get("/", getAllStudies);
-// router.post("/", createStudy);
+router.get("/", fetchAllStudies);
+router.post("/", addStudy);
 // router.get("/:studyId", getStudyById);
 // router.patch("/:studyId", updateStudy);
 // router.delete("/:studyId", deleteStudy);

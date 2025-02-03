@@ -6,7 +6,6 @@ const modifyHabitById = async (habitId, data) => {
       id: habitId,
     },
     data,
-    select: { habitId: true, deletedAt: true, select: true },
   });
   return updatedHabit;
 };
