@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "CHOKIDAR_USEPOLLING=true nodemon app.js",
+    "dev": "nodemon app.js",
     "build": "npm install",
     "seed": "node prisma/seeds/seed.js"
   },

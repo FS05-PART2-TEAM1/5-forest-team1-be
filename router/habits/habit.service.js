@@ -12,16 +12,42 @@ const modifyHabitById = async (habitId, data) => {
 };
 
 const modifyDailyHabitById = async (habitId, data) => {
-    const dayOfWeek = new Date().getDay();
-    await prisma.dailyHabit.update({
+    const startTime = new Date();
+    const endTime = new Date();
+    startTime.setHours(0,0,0,0);
+    endTime.setHours(23,59,59,999);
+
+    const foundDailyHabit = await prisma.dailyHabit.findFirst({
         where: {
-            habitId_dayOfWeek: {
-                habitId,
-                dayOfWeek,
-            },
+            habitId,
+            date: {
+                    gte: startTime,
+                    lte: endTime,
+            }
         },
-        data,
     })
+
+    if(foundDailyHabit){
+        const dailyHabit = await prisma.dailyHabit.update({
+            where : {
+                id: foundDailyHabit.id,
+            },
+            data: {
+                status: data.status,
+            },
+        })
+    } else {
+        const dailyHabit = await prisma.dailyHabit.create({
+            data : {
+                habitId,
+                date: now,
+                status: data.status,
+            }
+        })
+    }
+
+
+
 }
 
 

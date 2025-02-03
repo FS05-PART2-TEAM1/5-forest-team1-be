@@ -1,6 +1,6 @@
-PATCH http://localhost:5004/api/studies/hello/habits/test/check/today
+POST http://localhost:5004/api/studies/hello/habits/test/check/today
 Content-Type: application/json
 
 {
-    "status" : true
+    "status": true
 }

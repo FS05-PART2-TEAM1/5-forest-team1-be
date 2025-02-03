@@ -1,30 +1,30 @@
 export const dailyHabits = [
     {
         habitId: "test",
-        dayOfWeek: 0,
+        date: new Date("2023-12-01T15:30:00"),
     },
     {
         habitId: "test",
-        dayOfWeek: 1,
+        date: new Date("2023-12-02T15:30:00"),
     },
     {
         habitId: "test",
-        dayOfWeek: 2,
+        date: new Date("2023-12-03T15:30:00"),
     },
     {
         habitId: "test",
-        dayOfWeek: 3,
+        date: new Date("2023-12-04T15:30:00"),
     },
     {
         habitId: "test",
-        dayOfWeek: 4,
+        date: new Date("2023-12-05T15:30:00"),
     },
     {
         habitId: "test",
-        dayOfWeek: 5,
+        date: new Date("2023-12-06T15:30:00"),
     },
     {
         habitId: "test",
-        dayOfWeek: 6,
+        date: new Date("2023-12-07T15:30:00"),
     }
 ]

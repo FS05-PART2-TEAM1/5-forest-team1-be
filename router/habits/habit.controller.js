@@ -19,8 +19,8 @@ export const modifyHabitById = async (req, res) => {
 export const modifyDailyHabitById = async (req, res) => {
     try {
         const habitId = req.params.habitId;
-        await habitService.modifyDailyHabitById(habitId, req.body)
-        res.status(200).send({ message : "dailyHabit 수정 완료."})
+        const dailyHabit = await habitService.modifyDailyHabitById(habitId, req.body);
+        res.status(200).send(dailyHabit);
     } catch (err) {
         if(err.code === 'P2025') {
             res.status(400).send({ message : "아이디에 해당하는 dailyHabit이 존재하지 않습니다."});
