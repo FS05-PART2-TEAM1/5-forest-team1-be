@@ -8,7 +8,7 @@ import {
   // getStudyPoints,
 } from "./study.controller.js";
 // import habitRouter from "../habits/index.js";
-// import reactionRouter from "../reactions/index.js";
+import reactionRouter from "../reactions/index.js";
 // import pointRouter from "../points/index.js";
 
 const router = express.Router();
@@ -21,7 +21,7 @@ router.post("/", addStudy);
 // router.get("/:studyId/points", getStudyPoints);
 
 // router.use("/:studyId/habits", habitRouter);
-// router.use("/:studyId/reactions", reactionRouter);
+router.use("/:studyId/reactions", reactionRouter);
 // router.use("/:studyId/points", pointRouter);
 
 export default router;
