@@ -15,6 +15,11 @@ const fetchReactionsByStudyId = async (studyId) => {
 const addReaction = async (data) => {
   return await prisma.reaction.create({
     data,
+    select: {
+      id: true,
+      emoji: true,
+      counts: true,
+    },
   });
 };
 
