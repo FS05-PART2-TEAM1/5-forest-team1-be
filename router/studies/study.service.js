@@ -54,7 +54,7 @@ export const fetchAllStudies = async (
 };
 
 /// 스터디 수정 서비스 함수
-export const updateStudy = async (
+export const modifyStudy = async (
   studyId,
   name,
   description,
@@ -69,19 +69,19 @@ export const updateStudy = async (
       return null;
     }
 
-    const updateData = {};
-    if (name) updateData.name = name;
+    const modifyData = {};
+    if (name) modifyData.name = name;
 
-    if (description) updateData.description = description;
+    if (description) modifyData.description = description;
 
-    if (backgroundUrl) updateData.backgroundUrl = backgroundUrl;
+    if (backgroundUrl) modifyData.backgroundUrl = backgroundUrl;
 
-    const updatedStudy = await prisma.study.update({
+    const result = await prisma.study.update({
       where: { id: studyId },
-      data: updateData,
+      data: modifyData,
     });
 
-    return updatedStudy;
+    return result;
   } catch (err) {
     console.error("스터디 수정 중 오류 발생", err);
     throw err;
@@ -90,7 +90,7 @@ export const updateStudy = async (
 
 const studyService = {
   fetchAllStudies,
-  updateStudy,
+  modifyStudy,
 };
 
 export default studyService;

@@ -17,16 +17,16 @@ export const fetchAllStudies = async (req, res) => {
 };
 
 /// 스터디 수정 API
-export const updateStudy = async (req, res) => {
+export const modifyStudy = async (req, res) => {
   const { studyId } = req.params;
-  const { name, description, backgroundIrl } = req.body;
+  const { name, description, backgroundImageUrl } = req.body;
 
   try {
-    const result = await studyService.updateStudy(
+    const result = await studyService.modifyStudy(
       studyId,
       name,
       description,
-      backgroundIrl
+      backgroundImageUrl
     );
 
     if (!result) {
