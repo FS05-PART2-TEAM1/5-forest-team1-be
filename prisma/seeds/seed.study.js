@@ -4,7 +4,7 @@ export const studies = [
     password: "password123",
     description: "매주 알고리즘 문제를 함께 풀어보는 스터디입니다.",
     backgroundImageUrl: "https://example.com/images/algorithm.jpg",
-    point: 100,
+    points: 100,
     createdAt: new Date("2024-01-01"),
   },
   {
@@ -12,7 +12,7 @@ export const studies = [
     password: "password123",
     description: "리액트와 Next.js를 학습하는 스터디입니다.",
     backgroundImageUrl: "https://example.com/images/react.jpg",
-    point: 150,
+    points: 150,
     createdAt: new Date("2024-02-01"),
   },
   {
@@ -20,7 +20,7 @@ export const studies = [
     password: "password123",
     description: "파이썬 기초부터 차근차근 배워보아요",
     backgroundImageUrl: "https://example.com/images/python.jpg",
-    point: 80,
+    points: 80,
     createdAt: new Date("2024-03-01"),
   },
   {
@@ -28,7 +28,7 @@ export const studies = [
     password: "password123",
     description: "기업 코딩 테스트 준비를 위한 스터디",
     backgroundImageUrl: "https://example.com/images/coding-test.jpg",
-    point: 120,
+    points: 120,
     createdAt: new Date("2024-03-15"),
   },
   {
@@ -36,7 +36,7 @@ export const studies = [
     password: "password123",
     description: "자바스크립트 고급 개념 학습 스터디",
     backgroundImageUrl: "https://example.com/images/javascript.jpg",
-    point: 200,
+    points: 200,
     createdAt: new Date("2024-03-20"),
   },
   {
@@ -44,7 +44,7 @@ export const studies = [
     password: "password123",
     description: "SQL과 NoSQL 데이터베이스 학습",
     backgroundImageUrl: "https://example.com/images/database.jpg",
-    point: 90,
+    points: 90,
     createdAt: new Date("2024-03-25"),
   },
   {
@@ -52,7 +52,7 @@ export const studies = [
     password: "password123",
     description: "웹 보안과 관련된 개념을 학습합니다.",
     backgroundImageUrl: "https://example.com/images/security.jpg",
-    point: 180,
+    points: 180,
     createdAt: new Date("2024-03-30"),
   },
 ];
