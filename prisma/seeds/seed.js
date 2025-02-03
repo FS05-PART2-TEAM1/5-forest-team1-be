@@ -1,9 +1,10 @@
-import prisma from "../prismaClient.js";
-import { studies } from "./seeds/seed.study.js";
+import prisma from "../../prismaClient.js";
+import { studies } from "./seed.study.js";
+import { reactions } from "./seed.reaction.js";
 
 async function main() {
-  await prisma.reaction.deleteMany({});
   await prisma.study.deleteMany({});
+  await prisma.reaction.deleteMany({});
 
   for (const study of studies) {
     const { reactions, ...studyData } = study;
@@ -22,6 +23,19 @@ async function main() {
         });
       }
     }
+  }
+
+  const fetchedStudies = await prisma.study.findMany();
+  let idx = 0;
+  let cnt = 0;
+  let studyId = "";
+  for (const reaction of reactions) {
+    if (fetchedStudies.length > idx) studyId = fetchedStudies[idx].id;
+    await prisma.reaction.create({
+      data: { ...reaction, studyId },
+    });
+    cnt += 1;
+    if (cnt === 4) idx += 1;
   }
 
   console.log("시드 데이터가 성공적으로 생성되었습니다.");
