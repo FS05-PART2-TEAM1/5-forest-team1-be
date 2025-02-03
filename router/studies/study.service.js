@@ -108,9 +108,28 @@ export const addStudy = async (
   return study;
 };
 
+/// 스터디 비밀번호 검증함수
+export const verifyPassword = async (studyId, password) => {
+  const study = await prisma.study.findUnique({
+    where: { id: studyId },
+    select: { password: true },
+  });
+
+  if (!study) {
+    throw new Error("스터디를 찾을 수 없습니다.");
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, study.password);
+  if (!isPasswordValid) {
+    throw new Error("비밀번호가 일치하지 않습니다.");
+  }
+
+  return true;
+};
 const studyService = {
   fetchAllStudies,
   addStudy,
+  verifyPassword,
 };
 
 export default studyService;
