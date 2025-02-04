@@ -60,27 +60,18 @@ export const modifyStudy = async (
   description,
   backgroundImageUrl
 ) => {
-  try {
-    const modifyData = {};
-    if (name) modifyData.name = name;
-    if (description) modifyData.description = description;
-    if (backgroundImageUrl) modifyData.backgroundImageUrl = backgroundImageUrl;
+  const modifyData = {};
+  if (name) modifyData.name = name;
+  if (description) modifyData.description = description;
+  if (backgroundImageUrl) modifyData.backgroundImageUrl = backgroundImageUrl;
 
-    const result = await prisma.study.update({
-      where: { id: studyId },
-      data: modifyData,
-    });
+  const result = await prisma.study.update({
+    where: { id: studyId },
+    data: modifyData,
+  });
 
-    return result;
-  } catch (err) {
-    if (err.code === "P2025") {
-      return null;
-    }
-    console.error("스터디 수정 중 오류 발생", err);
-    throw err;
-  }
+  return result;
 };
-
 const studyService = {
   fetchAllStudies,
   modifyStudy,
