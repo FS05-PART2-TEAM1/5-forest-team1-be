@@ -1,10 +1,14 @@
 import express from "express";
-import reactionController from "./reaction.controller.js";
+import {
+  fetchReactions,
+  addReaction,
+  modifyReaction,
+} from "./reaction.controller.js";
 
-const router = express.Router({ mergeParams: true });
+const router = express.Router();
 
-router.get("/", reactionController.fetchReactions);
-router.post("/", reactionController.addReaction);
-router.patch("/:reactionId", reactionController.modifyReaction);
+router.get("/", fetchReactions);
+router.post("/", addReaction);
+router.patch("/:reactionId", modifyReaction);
 
 export default router;
