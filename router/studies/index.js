@@ -3,7 +3,7 @@ import {
   fetchAllStudies,
   addStudy,
   // getStudyById,
-  // updateStudy,
+  modifyStudy,
   // deleteStudy,
   // getStudyPoints,
 } from "./study.controller.js";
@@ -16,7 +16,7 @@ const router = express.Router();
 router.get("/", fetchAllStudies);
 router.post("/", addStudy);
 // router.get("/:studyId", getStudyById);
-// router.patch("/:studyId", updateStudy);
+router.patch("/:studyId", modifyStudy);
 // router.delete("/:studyId", deleteStudy);
 // router.get("/:studyId/points", getStudyPoints);
 
