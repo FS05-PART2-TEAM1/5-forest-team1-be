@@ -10,49 +10,37 @@ const modifyHabitById = async (habitId, data) => {
   return updatedHabit;
 };
 
-const modifyDailyHabitById = async (habitId, data) => {
-    const startTime = new Date();
-    const endTime = new Date();
-    startTime.setHours(0,0,0,0);
-    endTime.setHours(23,59,59,999);
+const modifyDailyHabitById = async (habitId, status) => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = ('0' + (1 + now.getMonth())).slice(-2);
+  const day = ('0' + now.getDate()).slice(-2);
 
-    const foundDailyHabit = await prisma.dailyHabit.findFirst({
-        where: {
-            habitId,
-            date: {
-                    gte: startTime,
-                    lte: endTime,
-            }
-        },
-    })
+  const today = `${year}-${month}-${day}`; // YYYY-MM-DD
 
-    if(foundDailyHabit){
-        const dailyHabit = await prisma.dailyHabit.update({
-            where : {
-                id: foundDailyHabit.id,
-            },
-            data: {
-                status: data.status,
-            },
-        })
-    } else {
-        const dailyHabit = await prisma.dailyHabit.create({
-            data : {
-                habitId,
-                date: now,
-                status: data.status,
-            }
-        })
-    }
+  const dailyHabit = await prisma.dailyHabit.upsert({
+    where: {
+      habitId_date: {
+        habitId,
+        date: today,
+      },
+    },
+    update: {
+      date: today,
+      status,
+    },
+    create: {
+      habitId,
+      date: today,
+    },
+  });
 
-
-
-}
-
+  return dailyHabit;
+};
 
 const habitService = {
-    modifyHabitById,
-    modifyDailyHabitById,
-}
+  modifyHabitById,
+  modifyDailyHabitById,
+};
 
 export default habitService;

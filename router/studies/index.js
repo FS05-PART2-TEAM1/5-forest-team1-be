@@ -7,8 +7,8 @@ import {
   // deleteStudy,
   // getStudyPoints,
 } from "./study.controller.js";
-// import habitRouter from "../habits/index.js";
-import reactionRouter from "../reactions/index.js";
+import habitRouter from "../habits/index.js";
+// import reactionRouter from "../reactions/index.js";
 // import pointRouter from "../points/index.js";
 
 const router = express.Router();
