@@ -7,7 +7,7 @@ model dailyHabitCheck {
   updatedAt DateTime @updatedAt
 
   @@unique([habitId, date])
-  @@index([date, habitId])
+  @@index([date, habitId]) // date를 기준으로 더 많이 검색하기 때문에 앞으로
 }
 
 /**
