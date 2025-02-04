@@ -1,31 +1,18 @@
 import prisma from "../../prismaClient.js";
 
 const fetchHabits = async (studyId) => {
-  try {
-    const habitList = await prisma.habit.findMany({
-      where: { studyId },
-
-    });
-    return habitList;
-  } catch (err) {
-    console.error(err);
-    throw new Error("Failed to fetch habits.");
-  }
+  return await prisma.habit.findMany({
+    where: { studyId },
+  });
 };
 
 const addHabit = async (studyId, name) => {
-  try {
-    const newHabit = await prisma.habit.create({
-      data: {
-        studyId,
-        name,
-      },
-    });
-    return newHabit;
-  } catch (err) {
-    console.error(err);
-    throw new Error("Failed to add a new habit.");
-  }
+  return await prisma.habit.create({
+    data: {
+      studyId,
+      name,
+    },
+  });
 };
 
 const modifyHabitById = async (habitId, data) => {
@@ -38,10 +25,41 @@ const modifyHabitById = async (habitId, data) => {
   return updatedHabit;
 };
 
+const modifyDailyHabitById = async (habitId, status) => {
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const koreaTimeDiff = 9 * 60 * 60 * 1000;
+  const korNow = new Date(utc + koreaTimeDiff);
+  const year = korNow.getFullYear();
+  const month = ("0" + (1 + korNow.getMonth())).slice(-2);
+  const day = ("0" + korNow.getDate()).slice(-2);
+  const today = `${year}-${month}-${day}`; // YYYY-MM-DD
+
+  const dailyHabit = await prisma.dailyHabit.upsert({
+    where: {
+      habitId_date: {
+        habitId,
+        date: new Date(today),
+      },
+    },
+    update: {
+      date: new Date(today),
+      status,
+    },
+    create: {
+      habitId,
+      date: new Date(today),
+    },
+  });
+
+  return dailyHabit;
+};
+
 const habitService = {
   fetchHabits,
   addHabit,
   modifyHabitById,
+  modifyDailyHabitById,
 };
 
 export default habitService;

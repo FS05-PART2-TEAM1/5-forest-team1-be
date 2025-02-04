@@ -1,12 +1,42 @@
 import prisma from "../../prismaClient.js";
 import { studies } from "./seed.study.js";
 import { reactions } from "./seed.reaction.js";
-import { habits } from "./seed.habit.js";
+import { habits } from "./seed.habits.js";
+import { dailyHabits } from "./seed.dailyHabits.js";
 
 async function main() {
   await prisma.study.deleteMany({});
   await prisma.reaction.deleteMany({});
   await prisma.habit.deleteMany({});
+  await prisma.dailyHabit.deleteMany({});
+
+  for (const dailyHabit of dailyHabits) {
+    await prisma.dailyHabit.create({
+      data: dailyHabit,
+    });
+  }
+
+  for (const habit of habits) {
+    const existingHabit = await prisma.habit.findFirst({
+      where: {
+        studyId: habit.studyId,
+        name: habit.name,
+      },
+    });
+
+    if (!existingHabit) {
+      // If not found, insert the habit
+      await prisma.habit.create({
+        data: habit,
+      });
+    }
+  }
+
+  for (const habit of habits) {
+    await prisma.habit.create({
+      data: habit,
+    });
+  }
 
   for (const study of studies) {
     const { reactions, ...studyData } = study;
@@ -24,23 +54,6 @@ async function main() {
           },
         });
       }
-    }
-  }
-
-  for (const habit of habits) {
-    // Check if a habit with the same studyId and name already exists
-    const existingHabit = await prisma.habit.findFirst({
-      where: {
-        studyId: habit.studyId,
-        name: habit.name,
-      },
-    });
-
-    if (!existingHabit) {
-      // If not found, insert the habit
-      await prisma.habit.create({
-        data: habit,
-      });
     }
   }
 
