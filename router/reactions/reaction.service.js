@@ -27,6 +27,11 @@ const modifyReactionById = async ({ reactionId, counts }) => {
   return await prisma.reaction.update({
     where: { id: reactionId },
     data: { counts },
+    select: {
+      id: true,
+      emoji: true,
+      counts: true,
+    },
   });
 };
 
