@@ -5,6 +5,5 @@ model Habit {
   deletedAt DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-
   @@index([studyId])
 }

@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "CHOKIDAR_USEPOLLING=true nodemon app.js",
+    "dev": "cross-env CHOKIDAR_USEPOLLING=true nodemon app.js",
     "build": "npm install",
     "seed": "node prisma/seeds/seed.js"
   },
@@ -17,6 +17,7 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
     "prisma": "^6.2.1"

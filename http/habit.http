@@ -4,3 +4,11 @@ Content-Type: application/json
 {
     "deletedAt": "2025-02-03T06:41:26.111Z"
 }
+
+###
+POST http://localhost:5004/api/studies/hello/habits/test/check/today
+Content-Type: application/json
+
+{
+    "status":false
+}
