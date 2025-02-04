@@ -95,17 +95,17 @@ export const modifyStudy = async (
     data: modifyData,
   });
 
-<<<<<<< HEAD
+
   return result;
-=======
-    return result;
-  } catch (err) {
-    if (err.code === "P2025") {
-      return null;
-    }
-    console.error("스터디 수정 중 오류 발생", err);
-    throw err;
-  }
+  } 
+const existStudyById = async (id) => {
+  return Boolean(
+    await prisma.study.findUnique({
+      where: { id },
+    })
+  );
+}
+
 
 /// 스터디 만들기
 export const addStudy = async (
@@ -136,12 +136,12 @@ export const addStudy = async (
 
   return study;
 
->>>>>>> 49f0e5957acca536e278a70d03178384eeede3ff
 };
 const studyService = {
   fetchAllStudies,
-  modifyStudy,
 
+  modifyStudy,
+  existStudyById,
   addStudy,
 
 };
