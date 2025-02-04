@@ -78,6 +78,35 @@ export const fetchAllStudies = async (
   };
 };
 
+/// 스터디 수정 서비스 함수
+export const modifyStudy = async (
+  studyId,
+  name,
+  description,
+  backgroundImageUrl
+) => {
+  const modifyData = {};
+  if (name) modifyData.name = name;
+  if (description) modifyData.description = description;
+  if (backgroundImageUrl) modifyData.backgroundImageUrl = backgroundImageUrl;
+
+  const result = await prisma.study.update({
+    where: { id: studyId },
+    data: modifyData,
+  });
+
+
+  return result;
+  } 
+const existStudyById = async (id) => {
+  return Boolean(
+    await prisma.study.findUnique({
+      where: { id },
+    })
+  );
+}
+
+
 /// 스터디 만들기
 export const addStudy = async (
   name,
@@ -124,6 +153,8 @@ export const verifyPassword = async (studyId, password) => {
 
 const studyService = {
   fetchAllStudies,
+  modifyStudy,
+  existStudyById,
   addStudy,
   verifyPassword,
 };
