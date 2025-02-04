@@ -10,5 +10,5 @@ POST http://localhost:5004/api/studies/hello/habits/test/check/today
 Content-Type: application/json
 
 {
-    "status":"ee"
+    "status":false
 }
