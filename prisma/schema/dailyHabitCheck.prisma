@@ -1,4 +1,4 @@
-model dailyHabit {
+model dailyHabitCheck {
   id        String   @id @default(uuid())
   habitId   String
   date      DateTime @db.Date

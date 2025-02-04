@@ -25,7 +25,7 @@ const modifyHabitById = async (habitId, data) => {
   return updatedHabit;
 };
 
-const modifyDailyHabitById = async (habitId, status) => {
+const modifyDailyHabitCheck = async (habitId, status) => {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const koreaTimeDiff = 9 * 60 * 60 * 1000;
@@ -35,7 +35,7 @@ const modifyDailyHabitById = async (habitId, status) => {
   const day = ("0" + korNow.getDate()).slice(-2);
   const today = `${year}-${month}-${day}`; // YYYY-MM-DD
 
-  const dailyHabit = await prisma.dailyHabit.upsert({
+  const dailyHabitCheck = await prisma.dailyHabitCheck.upsert({
     where: {
       habitId_date: {
         habitId,
@@ -52,14 +52,14 @@ const modifyDailyHabitById = async (habitId, status) => {
     },
   });
 
-  return dailyHabit;
+  return dailyHabitCheck;
 };
 
 const habitService = {
   fetchHabits,
   addHabit,
   modifyHabitById,
-  modifyDailyHabitById,
+  modifyDailyHabitCheck,
 };
 
 export default habitService;
