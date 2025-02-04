@@ -2,6 +2,7 @@ import express from "express";
 import {
   fetchAllStudies,
   addStudy,
+  verifyPassword,
   // getStudyById,
   modifyStudy,
   // deleteStudy,
@@ -18,6 +19,7 @@ router.post("/", addStudy);
 // router.get("/:studyId", getStudyById);
 router.patch("/:studyId", modifyStudy);
 // router.delete("/:studyId", deleteStudy);
+router.post("/verify-password", verifyPassword);
 // router.get("/:studyId/points", getStudyPoints);
 
 router.use("/:studyId/habits", habitRouter);
