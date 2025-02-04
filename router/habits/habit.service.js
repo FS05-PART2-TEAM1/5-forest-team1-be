@@ -1,4 +1,19 @@
-import prisma from '../../prismaClient.js';
+import prisma from "../../prismaClient.js";
+
+const fetchHabits = async (studyId) => {
+  return await prisma.habit.findMany({
+    where: { studyId },
+  });
+};
+
+const addHabit = async (studyId, name) => {
+  return await prisma.habit.create({
+    data: {
+      studyId,
+      name,
+    },
+  });
+};
 
 const modifyHabitById = async (habitId, data) => {
   const updatedHabit = await prisma.habit.update({
@@ -16,8 +31,8 @@ const modifyDailyHabitById = async (habitId, status) => {
   const koreaTimeDiff = 9 * 60 * 60 * 1000;
   const korNow = new Date(utc + koreaTimeDiff);
   const year = korNow.getFullYear();
-  const month = ('0' + (1 + korNow.getMonth())).slice(-2);
-  const day = ('0' + korNow.getDate()).slice(-2);
+  const month = ("0" + (1 + korNow.getMonth())).slice(-2);
+  const day = ("0" + korNow.getDate()).slice(-2);
   const today = `${year}-${month}-${day}`; // YYYY-MM-DD
 
   const dailyHabit = await prisma.dailyHabit.upsert({
@@ -41,6 +56,8 @@ const modifyDailyHabitById = async (habitId, status) => {
 };
 
 const habitService = {
+  fetchHabits,
+  addHabit,
   modifyHabitById,
   modifyDailyHabitById,
 };

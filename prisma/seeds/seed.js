@@ -17,6 +17,22 @@ async function main() {
   }
 
   for (const habit of habits) {
+    const existingHabit = await prisma.habit.findFirst({
+      where: {
+        studyId: habit.studyId,
+        name: habit.name,
+      },
+    });
+
+    if (!existingHabit) {
+      // If not found, insert the habit
+      await prisma.habit.create({
+        data: habit,
+      });
+    }
+  }
+
+  for (const habit of habits) {
     await prisma.habit.create({
       data: habit,
     });
