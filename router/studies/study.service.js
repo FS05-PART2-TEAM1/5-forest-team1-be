@@ -78,7 +78,6 @@ export const fetchAllStudies = async (
   };
 };
 
-
 export const removeStudy = async (studyId) => {
 
   const removed = await prisma.study.delete({
@@ -87,7 +86,14 @@ export const removeStudy = async (studyId) => {
   return removed;
   }
 
-  
+const existStudyById = async (id) => {
+  return Boolean(
+    await prisma.study.findUnique({
+      where: { id },
+    })
+  );
+}
+
 /// 스터디 만들기
 export const addStudy = async (
   name,
@@ -121,9 +127,8 @@ export const addStudy = async (
 
 const studyService = {
   fetchAllStudies,
-
   removeStudy,
-
+  existStudyById,
   addStudy,
 
 };
