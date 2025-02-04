@@ -78,6 +78,14 @@ export const fetchAllStudies = async (
   };
 };
 
+const existStudyById = async (id) => {
+  return Boolean(
+    await prisma.study.findUnique({
+      where: { id },
+    })
+  );
+}
+
 /// 스터디 만들기
 export const addStudy = async (
   name,
@@ -110,6 +118,7 @@ export const addStudy = async (
 
 const studyService = {
   fetchAllStudies,
+  existStudyById,
   addStudy,
 };
 
