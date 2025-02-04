@@ -1,4 +1,5 @@
 import studyService from "./study.service.js";
+import bcrypt from "bcrypt";
 
 export const fetchAllStudies = async (req, res) => {
   const { page, pageSize, keyword, sortBy } = req.query;
@@ -16,6 +17,7 @@ export const fetchAllStudies = async (req, res) => {
   }
 };
 
+
 /// 스터디 삭제
 export const removeStudy = async (req, res) => {
   const { studyId } = req.params;
@@ -31,5 +33,26 @@ export const removeStudy = async (req, res) => {
     return res
       .status(500)
       .send({ error: "스터디 삭제 중 오류가 발생했습니다." });
+  }
+}
+export const addStudy = async (req, res) => {
+  const { name, password, passwordConfirm, description, backgroundImageUrl } =
+    req.body;
+
+  if (password !== passwordConfirm) {
+    return res.status(400).send({ error: "비밀번호가 일치하지 않습니다." });
+  }
+
+  try {
+    const result = await studyService.addStudy(
+      name,
+      description,
+      backgroundImageUrl,
+      password
+    );
+    res.status(201).send(result);
+  } catch (err) {
+    res.status(500).send({ error: "스터디 생성에 실패했습니다." });
+
   }
 };
