@@ -65,7 +65,7 @@ export const fetchHabitCheck = async (req, res) => {
     const habitId = req.params.habitId;
     const {start, end} = req.query;
     const habitChecks = await habitService.fetchHabitCheck(habitId, start, end);
-    
+    res.status(200).send(habitChecks);
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "예기치 못한 에러 발생!" });

@@ -55,11 +55,26 @@ const modifyDailyHabitCheck = async (habitId, status) => {
   return dailyHabitCheck;
 };
 
+const fetchHabitCheck = async (habitId, start, end) => {
+  const habitCheckList = await prisma.dailyHabitCheck.findMany({
+    where: {
+      habitId,
+      date: {
+        gte: start,
+        lte: end,
+      }
+    }
+  });
+
+  return habitCheckList;
+}
+
 const habitService = {
   fetchHabits,
   addHabit,
   modifyHabitById,
   modifyDailyHabitCheck,
+  fetchHabitCheck,
 };
 
 export default habitService;

@@ -12,3 +12,8 @@ Content-Type: application/json
 {
     "status":true
 }
+
+###
+
+GET http://localhost:5004/api/studies/hello/habits/test/check?start=2025-02-04T00:00:00.000Z&end=2025-02-07T00:00:00.000Z
+
