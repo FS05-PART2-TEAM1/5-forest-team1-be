@@ -22,16 +22,12 @@ export const removeStudy = async (req, res) => {
 
   try {
     const deleted = await studyService.removeStudy(studyId);
-
-    if (!deleted) {
-      return res.status(404).send({ error: "해당 스터디를 찾을 수 없습니다." });
-    }
     return res.status(200).send({
       message: "스터디가 삭제되었습니다.",
       study: deleted,
     });
   } catch (err) {
-    console.error("삭제 중 오류 발생", err);
+    console.error("스터디 삭제 중 오류 발생", err);
     return res
       .status(500)
       .send({ error: "스터디 삭제 중 오류가 발생했습니다." });
