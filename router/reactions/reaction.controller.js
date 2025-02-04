@@ -37,12 +37,22 @@ const modifyReaction = async (req, res) => {
   const { counts } = req.body;
 
   try {
+    if (!(await studyService.existStudyById(studyId))) {
+      return res
+        .status(400)
+        .send({ message: `유효하지 않은 "study id"입니다.` });
+    }
+
     const reaction = await reactionService.modifyReactionById({
       reactionId,
       counts,
     });
     res.status(200).send({ studyId: studyId, reaction });
   } catch (err) {
+    if (err.code === "P2025") {
+      res.status(400).send({ message: `유효하지 않은 "reaction id"입니다.` });
+    }
+
     console.log(`Error in reactionController.modifyReaction :: ${err.message}`);
     res.status(500).send({ message: "Internal Server Error" });
   }
