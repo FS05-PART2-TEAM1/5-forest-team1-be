@@ -137,6 +137,10 @@ export const studies = [
         emoji: "📊",
         counts: 2,
       },
+      {
+        emoji: "👏",
+        counts: 6,
+      },
     ],
   },
   {
