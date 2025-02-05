@@ -107,6 +107,8 @@ export const modifyStudy = async (
 
 
   return result;
+
+
   } 
 
 const existStudyById = async (id) => {
