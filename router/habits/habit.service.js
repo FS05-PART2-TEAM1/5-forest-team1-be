@@ -62,12 +62,12 @@ const fetchHabitCheck = async (habitId, start, end) => {
       date: {
         gte: start,
         lte: end,
-      }
-    }
+      },
+    },
   });
 
   return habitCheckList;
-}
+};
 
 const habitService = {
   fetchHabits,
