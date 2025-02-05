@@ -63,20 +63,20 @@ export const fetchAllStudies = async (
 
   const reactions = await prisma.reaction.findMany({
     where: {
-      studyId: {
-        in: studyIds,
-      },
+      studyId: { in: studyIds },
     },
-    orderBy: {
-      counts: "desc",
-    },
-    take: 3,
+    orderBy: { counts: "desc" },
   });
 
-  const studiesWithReactions = studies.map((study) => ({
-    ...study,
-    reactions: reactions.filter((reaction) => reaction.studyId === study.id),
-  }));
+  const studiesWithReactions = studies.map((study) => {
+    const studyReactions = reactions
+      .filter((reaction) => reaction.studyId === study.id)
+      .slice(0, 3);
+    return {
+      ...study,
+      reactions: studyReactions,
+    };
+  });
 
   return {
     studies: studiesWithReactions,
@@ -85,6 +85,7 @@ export const fetchAllStudies = async (
     totalPages: Math.ceil(total / Number(pageSize)),
   };
 };
+
 /// 스터디 만들기
 export const addStudy = async (
   nickname,

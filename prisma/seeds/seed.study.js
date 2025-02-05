@@ -14,8 +14,12 @@ export const studies = [
         counts: 5,
       },
       {
+        emoji: "👏",
+        counts: 6,
+      },
+      {
         emoji: "🔥",
-        counts: 3,
+        counts: 9,
       },
     ],
   },
@@ -32,6 +36,18 @@ export const studies = [
       {
         emoji: "❤️",
         counts: 7,
+      },
+      {
+        emoji: "👏",
+        counts: 6,
+      },
+      {
+        emoji: "🔥",
+        counts: 9,
+      },
+      {
+        emoji: "😎",
+        counts: 3,
       },
     ],
   },
@@ -92,6 +108,14 @@ export const studies = [
       {
         emoji: "⭐",
         counts: 5,
+      },
+      {
+        emoji: "👏",
+        counts: 6,
+      },
+      {
+        emoji: "🔥",
+        counts: 9,
       },
     ],
   },
