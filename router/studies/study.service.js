@@ -67,6 +67,10 @@ export const fetchAllStudies = async (
         in: studyIds,
       },
     },
+    orderBy: {
+      counts: "desc",
+    },
+    take: 3,
   });
 
   const studiesWithReactions = studies.map((study) => ({
