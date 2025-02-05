@@ -78,6 +78,16 @@ export const fetchAllStudies = async (
   };
 };
 
+
+export const removeStudy = async (studyId) => {
+
+  const removed = await prisma.study.delete({
+    where: { id: studyId },
+  });
+  return removed;
+  }
+
+
 /// 스터디 수정 서비스 함수
 export const modifyStudy = async (
   studyId,
@@ -98,6 +108,7 @@ export const modifyStudy = async (
 
   return result;
   } 
+
 const existStudyById = async (id) => {
   return Boolean(
     await prisma.study.findUnique({
@@ -135,6 +146,7 @@ export const addStudy = async (
   });
 
   return study;
+
 };
 
 /// 스터디 비밀번호 검증함수
@@ -153,10 +165,13 @@ export const verifyPassword = async (studyId, password) => {
 
 const studyService = {
   fetchAllStudies,
+
+  removeStudy,
   modifyStudy,
   existStudyById,
   addStudy,
   verifyPassword,
+
 };
 
 export default studyService;

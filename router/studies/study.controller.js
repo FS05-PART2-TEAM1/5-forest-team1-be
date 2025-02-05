@@ -17,6 +17,24 @@ export const fetchAllStudies = async (req, res) => {
 };
 
 
+
+/// 스터디 삭제
+export const removeStudy = async (req, res) => {
+  const { studyId } = req.params;
+
+  try {
+    const deleted = await studyService.removeStudy(studyId);
+    return res.status(200).send({
+      message: "스터디가 삭제되었습니다.",
+      study: deleted,
+    });
+  } catch (err) {
+    console.error("스터디 삭제 중 오류 발생", err);
+    return res
+      .status(500)
+      .send({ error: "스터디 삭제 중 오류가 발생했습니다." });
+  }
+}
 /// 스터디 수정 API
 
 export const modifyStudy = async (req, res) => {
@@ -46,6 +64,7 @@ export const modifyStudy = async (req, res) => {
   }
 };
 
+
 export const addStudy = async (req, res) => {
   const { name, password, passwordConfirm, description, backgroundImageUrl } =
     req.body;
@@ -64,6 +83,7 @@ export const addStudy = async (req, res) => {
     res.status(201).send(result);
   } catch (err) {
     res.status(500).send({ error: "스터디 생성에 실패했습니다." });
+
 
   }
 };
@@ -96,5 +116,6 @@ export const verifyPassword = async (req, res) => {
     res.status(500).send({
       error: "서버 오류가 발생했습니다.",
     });
+
   }
 };
