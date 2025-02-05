@@ -11,7 +11,8 @@ export const fetchAllStudies = async (
   const where = keyword
     ? {
         OR: [
-          { name: { contains: keyword, mode: "insensitive" } },
+          { nickname: { contains: keyword, mode: "insensitive" } },
+          { title: { contains: keyword, mode: "insensitive" } },
           { description: { contains: keyword, mode: "insensitive" } },
         ],
       }
@@ -45,9 +46,12 @@ export const fetchAllStudies = async (
     take,
     select: {
       id: true,
-      name: true,
+      nickname: true,
+      title: true,
       description: true,
       points: true,
+      backgroundType: true,
+      backgroundContent: true,
       createdAt: true,
       updatedAt: true,
     },
@@ -79,9 +83,11 @@ export const fetchAllStudies = async (
 };
 /// 스터디 만들기
 export const addStudy = async (
-  name,
+  nickname,
+  title,
   description,
-  backgroundImageUrl,
+  backgroundType,
+  backgroundContent,
   password
 ) => {
   /// 비밀번호 해싱 처리 (saltRounds = 10)
@@ -89,16 +95,20 @@ export const addStudy = async (
 
   const study = await prisma.study.create({
     data: {
-      name,
+      nickname,
+      title,
       description,
-      backgroundImageUrl,
+      backgroundType,
+      backgroundContent,
       password: hashedPassword,
     },
     select: {
       id: true,
-      name: true,
+      nickname: true,
+      title: true,
       description: true,
-      backgroundImageUrl: true,
+      backgroundType: true,
+      backgroundContent: true,
       createdAt: true,
       updatedAt: true,
     },
@@ -132,14 +142,18 @@ export const removeStudy = async (studyId) => {
 /// 스터디 수정
 export const modifyStudy = async (
   studyId,
-  name,
+  nickname,
+  title,
   description,
-  backgroundImageUrl
+  backgroundType,
+  backgroundContent
 ) => {
   const modifyData = {};
-  if (name) modifyData.name = name;
+  if (nickname) modifyData.nickname = nickname;
+  if (title) modifyData.title = title;
   if (description) modifyData.description = description;
-  if (backgroundImageUrl) modifyData.backgroundImageUrl = backgroundImageUrl;
+  if (backgroundType) modifyData.backgroundType = backgroundType;
+  if (backgroundContent) modifyData.backgroundContent = backgroundContent;
 
   const result = await prisma.study.update({
     where: { id: studyId },
@@ -162,9 +176,12 @@ export const fetchStudyDetail = async (studyId) => {
   const study = await prisma.study.findUnique({
     where: { id: studyId },
     select: {
-      name: true,
+      nickname: true,
+      title: true,
       description: true,
       points: true,
+      backgroundType: true,
+      backgroundContent: true,
     },
   });
 

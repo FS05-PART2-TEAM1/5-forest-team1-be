@@ -19,8 +19,15 @@ export const fetchAllStudies = async (req, res) => {
 
 /// 스터디 만들기
 export const addStudy = async (req, res) => {
-  const { name, password, passwordConfirm, description, backgroundImageUrl } =
-    req.body;
+  const {
+    nickname,
+    title,
+    password,
+    passwordConfirm,
+    description,
+    backgroundType,
+    backgroundContent,
+  } = req.body;
 
   if (password !== passwordConfirm) {
     return res.status(400).send({ error: "비밀번호가 일치하지 않습니다." });
@@ -28,9 +35,11 @@ export const addStudy = async (req, res) => {
 
   try {
     const result = await studyService.addStudy(
-      name,
+      nickname,
+      title,
       description,
-      backgroundImageUrl,
+      backgroundType,
+      backgroundContent,
       password
     );
     res.status(201).send(result);
@@ -74,14 +83,17 @@ export const verifyPassword = async (req, res) => {
 /// 스터디 수정
 export const modifyStudy = async (req, res) => {
   const { studyId } = req.params;
-  const { name, description, backgroundImageUrl } = req.body;
+  const { nickname, title, description, backgroundType, backgroundContent } =
+    req.body;
 
   try {
     const result = await studyService.modifyStudy(
       studyId,
-      name,
+      nickname,
+      title,
       description,
-      backgroundImageUrl
+      backgroundType,
+      backgroundContent
     );
 
     if (!result) {
