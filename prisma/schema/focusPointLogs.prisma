@@ -6,5 +6,6 @@ model FocusPointLogs {
   startedAt  DateTime
   finishedAt DateTime
   createdAt  DateTime @default(now())
+
   @@index([studyId])
 }
