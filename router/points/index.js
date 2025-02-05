@@ -1,9 +1,9 @@
-// import express from "express";
-// import { getStudyPoints, createPoint } from "./point.controller.js";
+import express from "express";
+import { addPoint } from "./point.controller.js";
 
-// const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // router.get("/:studyId/points", getStudyPoints);
-// router.post("/:studyId/points", createPoint);
+router.post("/", addPoint);
 
-// export default router;
+export default router;
