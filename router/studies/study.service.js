@@ -210,7 +210,6 @@ export const fetchStudyDetail = async (studyId) => {
     },
   });
 
-  // 각 습관의 체크 기록 조회
   const habitsWithChecks = [];
   for (const habit of habits) {
     const checks = await prisma.dailyHabitCheck.findMany({
