@@ -116,3 +116,21 @@ export const removeStudy = async (req, res) => {
       .send({ error: "스터디 삭제 중 오류가 발생했습니다." });
   }
 };
+
+/// 스터디 상세 조회
+export const fetchStudyDetail = async (req, res) => {
+  const { studyId } = req.params;
+
+  try {
+    const result = await studyService.fetchStudyDetail(studyId);
+    res.status(200).send(result);
+  } catch (err) {
+    if (err.message === "스터디를 찾을 수 없습니다.") {
+      return res.status(404).send({ error: err.message });
+    }
+    console.error("스터디 상세 조회 중 오류 발생", err);
+    res
+      .status(500)
+      .send({ error: "스터디 상세 정보를 가져오는데 실패했습니다." });
+  }
+};

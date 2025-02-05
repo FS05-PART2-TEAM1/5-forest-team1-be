@@ -5,6 +5,7 @@ import {
   verifyPassword,
   modifyStudy,
   removeStudy,
+  fetchStudyDetail,
 } from "./study.controller.js";
 
 import habitRouter from "../habits/index.js";
@@ -15,6 +16,7 @@ const router = express.Router();
 
 router.get("/", fetchAllStudies);
 router.post("/", addStudy);
+router.get("/:studyId", fetchStudyDetail);
 router.patch("/:studyId", modifyStudy);
 router.delete("/:studyId", removeStudy);
 router.post("/verify-password", verifyPassword);

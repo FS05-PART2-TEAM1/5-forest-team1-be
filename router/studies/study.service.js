@@ -158,6 +158,60 @@ const existStudyById = async (id) => {
   );
 };
 
+/// 스터디 상세 조회
+export const fetchStudyDetail = async (studyId) => {
+  const study = await prisma.study.findUnique({
+    where: { id: studyId },
+    select: {
+      name: true,
+      description: true,
+      points: true,
+    },
+  });
+
+  if (!study) {
+    throw new Error("스터디를 찾을 수 없습니다.");
+  }
+
+  const reactions = await prisma.reaction.findMany({
+    where: { studyId },
+    select: {
+      emoji: true,
+      counts: true,
+    },
+  });
+
+  const habits = await prisma.habit.findMany({
+    where: { studyId },
+    select: {
+      id: true,
+      name: true,
+    },
+  });
+
+  // 각 습관의 체크 기록 조회
+  const habitsWithChecks = [];
+  for (const habit of habits) {
+    const checks = await prisma.dailyHabitCheck.findMany({
+      where: { habitId: habit.id },
+      select: {
+        date: true,
+        status: true,
+      },
+    });
+    habitsWithChecks.push({
+      ...habit,
+      checks,
+    });
+  }
+
+  return {
+    ...study,
+    reactions,
+    habits: habitsWithChecks,
+  };
+};
+
 const studyService = {
   fetchAllStudies,
   addStudy,
@@ -165,6 +219,7 @@ const studyService = {
   removeStudy,
   modifyStudy,
   existStudyById,
+  fetchStudyDetail,
 };
 
 export default studyService;
