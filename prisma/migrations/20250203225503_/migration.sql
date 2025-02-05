@@ -19,7 +19,7 @@ CREATE TABLE "Study" (
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    -- "backgroundImageUrl" TEXT NOT NULL,
+    "backgroundImageUrl" TEXT NOT NULL,
     "points" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
