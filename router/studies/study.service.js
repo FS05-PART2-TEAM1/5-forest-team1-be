@@ -77,7 +77,6 @@ export const fetchAllStudies = async (
     totalPages: Math.ceil(total / Number(pageSize)),
   };
 };
-
 /// 스터디 만들기
 export const addStudy = async (
   name,
