@@ -1,4 +1,4 @@
-model dailyHabit {
+model dailyHabitCheck {
   id        String   @id @default(uuid())
   habitId   String
   date      DateTime @db.Date
@@ -7,7 +7,7 @@ model dailyHabit {
   updatedAt DateTime @updatedAt
 
   @@unique([habitId, date])
-  @@index([habitId])
+  @@index([date, habitId])
 }
 
 /**

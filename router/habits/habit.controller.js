@@ -52,10 +52,22 @@ export const modifyDailyHabitById = async (req, res) => {
     const status = req.body.status;
     if (!(status === true || status === false))
       return res.status(400).send({ message: "status 형식 에러" });
-    const dailyHabit = await habitService.modifyDailyHabitById(habitId, status);
+    const dailyHabit = await habitService.modifyDailyHabitCheck(habitId, status);
     res.status(200).send(dailyHabit);
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "예기치 못한 에러 발생!" });
   }
 };
+
+export const fetchHabitCheck = async (req, res) => {
+  try {
+    const habitId = req.params.habitId;
+    const {start, end} = req.query;
+    const habitChecks = await habitService.fetchHabitCheck(habitId, start, end);
+    res.status(200).send(habitChecks);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "예기치 못한 에러 발생!" });
+  }
+}

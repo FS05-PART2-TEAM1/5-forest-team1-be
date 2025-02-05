@@ -1,18 +1,18 @@
 import prisma from "../../prismaClient.js";
 import { studies } from "./seed.study.js";
 import { reactions } from "./seed.reaction.js";
-import { habits } from "./seed.habits.js";
-import { dailyHabits } from "./seed.dailyHabits.js";
+import { habits } from "./seed.habit.js";
+import { dailyHabitChecks } from "./seed.dailyHabitChecks.js";
 
 async function main() {
   await prisma.study.deleteMany({});
   await prisma.reaction.deleteMany({});
   await prisma.habit.deleteMany({});
-  await prisma.dailyHabit.deleteMany({});
+  await prisma.dailyHabitCheck.deleteMany({});
 
-  for (const dailyHabit of dailyHabits) {
-    await prisma.dailyHabit.create({
-      data: dailyHabit,
+  for (const dailyHabitCheck of dailyHabitChecks) {
+    await prisma.dailyHabitCheck.create({
+      data: dailyHabitCheck,
     });
   }
 
