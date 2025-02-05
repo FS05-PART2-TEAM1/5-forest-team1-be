@@ -4,7 +4,7 @@ const addPoint = async (studyId, data) => {
   const newFocusPointLog = await prisma.focusPointLogs.create({
     data: {
       studyId,
-      points: data.points,
+      points: data.focusPoints,
       focusTime: data.focusTime,
       startedAt: data.startedAt,
       finishedAt: data.finishedAt,
@@ -25,7 +25,7 @@ const addPoint = async (studyId, data) => {
     },
   });
 
-  return [changedStudy, { pointLog: newFocusPointLog }];
+  return { ...changedStudy, pointLog: newFocusPointLog };
 };
 
 const pointService = {
