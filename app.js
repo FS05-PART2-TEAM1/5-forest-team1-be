@@ -17,15 +17,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
-// favicon.ico 처리: 정적 파일 제공
-app.use(express.static(path.join(__dirname)));
-
-// /favicon.ico 요청이 들어오면 이를 처리
-app.get("/favicon.ico", (req, res) => {
-  res.sendFile(path.join(__dirname, "favicon.ico"));
-});
-
 app.use("/api", router);
 
 prisma
