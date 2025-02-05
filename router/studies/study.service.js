@@ -78,6 +78,46 @@ export const fetchAllStudies = async (
   };
 };
 
+
+export const removeStudy = async (studyId) => {
+
+  const removed = await prisma.study.delete({
+    where: { id: studyId },
+  });
+  return removed;
+  }
+
+
+/// 스터디 수정 서비스 함수
+export const modifyStudy = async (
+  studyId,
+  name,
+  description,
+  backgroundImageUrl
+) => {
+  const modifyData = {};
+  if (name) modifyData.name = name;
+  if (description) modifyData.description = description;
+  if (backgroundImageUrl) modifyData.backgroundImageUrl = backgroundImageUrl;
+
+  const result = await prisma.study.update({
+    where: { id: studyId },
+    data: modifyData,
+  });
+
+
+  return result;
+  } 
+
+const existStudyById = async (id) => {
+  return Boolean(
+    await prisma.study.findUnique({
+      where: { id },
+    })
+  );
+}
+
+
 /// 스터디 만들기
 export const addStudy = async (
   name,
@@ -106,11 +146,32 @@ export const addStudy = async (
   });
 
   return study;
+
+};
+
+/// 스터디 비밀번호 검증함수
+export const verifyPassword = async (studyId, password) => {
+  const study = await prisma.study.findUnique({
+    where: { id: studyId },
+    select: { password: true },
+  });
+
+  if (!study) {
+    throw new Error("스터디를 찾을 수 없습니다.");
+  }
+
+  return await bcrypt.compare(password, study.password);
 };
 
 const studyService = {
   fetchAllStudies,
+
+  removeStudy,
+  modifyStudy,
+  existStudyById,
   addStudy,
+  verifyPassword,
+
 };
 
 export default studyService;

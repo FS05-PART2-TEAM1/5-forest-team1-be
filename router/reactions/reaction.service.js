@@ -11,13 +11,34 @@ const fetchReactionsByStudyId = async (studyId) => {
     },
   });
 };
-const addReaction = () => {};
-const modifyReaction = () => {};
+
+const addReaction = async (data) => {
+  return await prisma.reaction.create({
+    data,
+    select: {
+      id: true,
+      emoji: true,
+      counts: true,
+    },
+  });
+};
+
+const modifyReactionById = async ({ reactionId, counts }) => {
+  return await prisma.reaction.update({
+    where: { id: reactionId },
+    data: { counts },
+    select: {
+      id: true,
+      emoji: true,
+      counts: true,
+    },
+  });
+};
 
 const reactionService = {
   fetchReactionsByStudyId,
   addReaction,
-  modifyReaction,
+  modifyReactionById,
 };
 
 export default reactionService;

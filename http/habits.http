@@ -1,0 +1,13 @@
+GET http://localhost:5004/api/studies/70c8c2ef-dca8-4667-924c-140cd339712b/habits
+
+###
+GET http://localhost:5004/api/studies
+
+###
+POST http://localhost:5004/api/studies/ebc55fa0-5848-4471-afc1-5ad2657fafd1/habits
+Content-Type: application/json
+
+{
+  "studyId": "ebc55fa0-5848-4471-afc1-5ad2657fafd1",
+  "name": "Study Algorithms"
+}
