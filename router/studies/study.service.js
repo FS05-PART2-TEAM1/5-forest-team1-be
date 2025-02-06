@@ -232,6 +232,55 @@ export const fetchStudyDetail = async (studyId) => {
   };
 };
 
+/// 최근 조회한 스터디 목록 조회
+export const fetchRecentStudies = async (studyIds) => {
+  if (!studyIds || studyIds.length === 0) {
+    return {
+      studies: [],
+      total: 0,
+    };
+  }
+
+  const studies = await prisma.study.findMany({
+    where: {
+      id: { in: studyIds },
+    },
+    select: {
+      id: true,
+      nickname: true,
+      title: true,
+      description: true,
+      totalPoints: true,
+      backgroundType: true,
+      backgroundContent: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  const reactions = await prisma.reaction.findMany({
+    where: {
+      studyId: { in: studyIds },
+    },
+    orderBy: { counts: "desc" },
+  });
+
+  const studiesWithReactions = studies.map((study) => {
+    const studyReactions = reactions
+      .filter((reaction) => reaction.studyId === study.id)
+      .slice(0, 3);
+    return {
+      ...study,
+      reactions: studyReactions,
+    };
+  });
+
+  return {
+    studies: studiesWithReactions,
+    total: studies.length,
+  };
+};
+
 const studyService = {
   fetchAllStudies,
   addStudy,
@@ -240,6 +289,7 @@ const studyService = {
   modifyStudy,
   existStudyById,
   fetchStudyDetail,
+  fetchRecentStudies,
 };
 
 export default studyService;
