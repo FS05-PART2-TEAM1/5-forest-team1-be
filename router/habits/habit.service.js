@@ -1,4 +1,19 @@
-import prisma from '../../prismaClient.js';
+import prisma from "../../prismaClient.js";
+
+const fetchHabits = async (studyId) => {
+  return await prisma.habit.findMany({
+    where: { studyId },
+  });
+};
+
+const addHabit = async (studyId, name) => {
+  return await prisma.habit.create({
+    data: {
+      studyId,
+      name,
+    },
+  });
+};
 
 const modifyHabitById = async (habitId, data) => {
   const updatedHabit = await prisma.habit.update({
@@ -10,17 +25,17 @@ const modifyHabitById = async (habitId, data) => {
   return updatedHabit;
 };
 
-const modifyDailyHabitById = async (habitId, status) => {
+const modifyDailyHabitCheck = async (habitId, status, habitName) => {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const koreaTimeDiff = 9 * 60 * 60 * 1000;
   const korNow = new Date(utc + koreaTimeDiff);
   const year = korNow.getFullYear();
-  const month = ('0' + (1 + korNow.getMonth())).slice(-2);
-  const day = ('0' + korNow.getDate()).slice(-2);
+  const month = ("0" + (1 + korNow.getMonth())).slice(-2);
+  const day = ("0" + korNow.getDate()).slice(-2);
   const today = `${year}-${month}-${day}`; // YYYY-MM-DD
 
-  const dailyHabit = await prisma.dailyHabit.upsert({
+  const dailyHabitCheck = await prisma.dailyHabitCheck.upsert({
     where: {
       habitId_date: {
         habitId,
@@ -29,20 +44,42 @@ const modifyDailyHabitById = async (habitId, status) => {
     },
     update: {
       date: new Date(today),
+      habitName,
       status,
     },
     create: {
       habitId,
+      habitName,
       date: new Date(today),
     },
   });
 
-  return dailyHabit;
+  return dailyHabitCheck;
+};
+
+const fetchHabitCheck = async (habitId, start, end) => {
+  const habitCheckList = await prisma.dailyHabitCheck.findMany({
+    where: {
+      habitId,
+      date: {
+        gte: start,
+        lte: end,
+      },
+    },
+    orderBy: {
+      date: "asc",
+    },
+  });
+
+  return habitCheckList;
 };
 
 const habitService = {
+  fetchHabits,
+  addHabit,
   modifyHabitById,
-  modifyDailyHabitById,
+  modifyDailyHabitCheck,
+  fetchHabitCheck,
 };
 
 export default habitService;
