@@ -1,7 +1,7 @@
 export const dailyHabitChecks = [
   {
     habitId: 'test',
-    date: new Date('2025-02-03'),
+    date: new Date('2025-02-05'),
   },
   {
     habitId: 'test',
@@ -9,7 +9,7 @@ export const dailyHabitChecks = [
   },
   {
     habitId: 'test',
-    date: new Date('2025-02-05'),
+    date: new Date('2025-02-03'),
   },
   {
     habitId: 'test',

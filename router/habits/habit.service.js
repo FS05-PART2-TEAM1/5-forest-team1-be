@@ -64,6 +64,9 @@ const fetchHabitCheck = async (habitId, start, end) => {
         lte: end,
       },
     },
+    orderBy: {
+      date: "asc",
+    },
   });
 
   return habitCheckList;
