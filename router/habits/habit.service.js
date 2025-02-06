@@ -1,7 +1,7 @@
 import prisma from "../../prismaClient.js";
 
 const fetchHabits = async (studyId) => {
-  return await prisma.habit.findMany({
+  const habit = await prisma.habit.findMany({
     where: { studyId },
   });
 };
@@ -25,7 +25,7 @@ const modifyHabitById = async (habitId, data) => {
   return updatedHabit;
 };
 
-const modifyDailyHabitCheck = async (habitId, status, habitName) => {
+const modifyDailyHabitCheck = async (habitId, status) => {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const koreaTimeDiff = 9 * 60 * 60 * 1000;
@@ -44,12 +44,10 @@ const modifyDailyHabitCheck = async (habitId, status, habitName) => {
     },
     update: {
       date: new Date(today),
-      habitName,
       status,
     },
     create: {
       habitId,
-      habitName,
       date: new Date(today),
     },
   });

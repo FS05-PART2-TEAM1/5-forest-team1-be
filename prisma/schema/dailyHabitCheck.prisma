@@ -1,7 +1,6 @@
 model dailyHabitCheck {
   id        String   @id @default(uuid())
   habitId   String
-  habitName String
   date      DateTime @db.Date
   status    Boolean  @default(true)
   createdAt DateTime @default(now())

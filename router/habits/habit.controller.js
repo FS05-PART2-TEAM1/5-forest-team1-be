@@ -49,10 +49,10 @@ export const modifyHabitById = async (req, res) => {
 export const modifyDailyHabitById = async (req, res) => {
   try {
     const habitId = req.params.habitId;
-    const {status, habitName} = req.body;
-    if (!(status === true || status === false) || !habitName)
+    const {status} = req.body;
+    if (!(status === true || status === false))
       return res.status(400).send({ message: "body 형식 에러" });
-    const dailyHabit = await habitService.modifyDailyHabitCheck(habitId, status, habitName);
+    const dailyHabit = await habitService.modifyDailyHabitCheck(habitId, status);
     res.status(200).send(dailyHabit);
   } catch (err) {
     console.log(err);
@@ -60,14 +60,14 @@ export const modifyDailyHabitById = async (req, res) => {
   }
 };
 
-export const fetchHabitCheck = async (req, res) => {
-  try {
-    const habitId = req.params.habitId;
-    const {start, end} = req.query;
-    const habitChecks = await habitService.fetchHabitCheck(habitId, start, end);
-    res.status(200).send(habitChecks);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send({ message: "예기치 못한 에러 발생!" });
-  }
-}
+// export const fetchHabitCheck = async (req, res) => {
+//   try {
+//     const habitId = req.params.habitId;
+//     const {start, end} = req.query;
+//     const habitChecks = await habitService.fetchHabitCheck(habitId, start, end);
+//     res.status(200).send(habitChecks);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send({ message: "예기치 못한 에러 발생!" });
+//   }
+// }
