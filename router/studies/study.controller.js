@@ -146,3 +146,21 @@ export const fetchStudyDetail = async (req, res) => {
       .send({ error: "스터디 상세 정보를 가져오는데 실패했습니다." });
   }
 };
+
+/// 최근 조회한 스터디 목록 조회
+export const fetchRecentStudies = async (req, res) => {
+  const { studyIds } = req.query;
+
+  try {
+    // 쿼리 파라미터로 받은 문자열을 배열로 변환
+    const studyIdArray = studyIds ? studyIds.split(",") : [];
+
+    const result = await studyService.fetchRecentStudies(studyIdArray);
+    res.status(200).send(result);
+  } catch (err) {
+    console.error("최근 조회한 스터디 목록 조회 중 오류 발생", err);
+    res.status(500).send({
+      error: "최근 조회한 스터디 목록을 가져오는데 실패했습니다.",
+    });
+  }
+};
