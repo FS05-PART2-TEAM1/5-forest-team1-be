@@ -1,14 +1,13 @@
 model Study {
-  id                 String   @id @default(uuid())
-  password           String
-  description        String
-  backgroundImageUrl String
-  nickname           String
-  title              String
-  backgroundType     String  // 'image' | 'color'
-  backgroundContent  String  // url | color ( green, yellow, blue, pink )
+  id                String @id @default(uuid())
+  password          String
+  description       String
+  nickname          String
+  title             String
+  backgroundType    String // 'image' | 'color'
+  backgroundContent String // url | color ( green, yellow, blue, pink )
 
-  points             Int      @default(0)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  totalPoints Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
