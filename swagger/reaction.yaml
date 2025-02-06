@@ -1,0 +1,16 @@
+components:
+  schemas:
+    ReactionResponse:
+      type: object
+      properties:
+        studyId:
+          type: string
+        reaction:
+          type: object
+          properties:
+            id:
+              type: string
+            emoji:
+              type: string
+            count:
+              type: integer
