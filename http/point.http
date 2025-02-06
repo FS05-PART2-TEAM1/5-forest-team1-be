@@ -1,9 +1,9 @@
-POST http://localhost:5004/api/studies/23b2cc1b-37f6-4454-a1a6-049fa80c0119/points
+POST http://localhost:5004/api/studies/076ae9d7-f112-4849-b14f-ce477cbc03bd/points
 Content-Type: application/json
 
 {
-  "points" : 100,
   "focusTime" : 30,
   "startedAt" : "2024-02-05T01:00:00.000Z",
-  "finishedAt" : "2024-02-05T01:30:00.000Z"
+  "finishedAt" : "2024-02-05T01:30:00.000Z",
+  "points" : 100
 }

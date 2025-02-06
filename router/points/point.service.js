@@ -1,10 +1,11 @@
 import prisma from "../../prismaClient.js";
 
 const addPoint = async (studyId, data) => {
+
   const newFocusPointLog = await prisma.focusPointLogs.create({
     data: {
       studyId,
-      points: data.focusPoints,
+      points: data.points,
       focusTime: data.focusTime,
       startedAt: data.startedAt,
       finishedAt: data.finishedAt,
@@ -16,12 +17,15 @@ const addPoint = async (studyId, data) => {
       id: studyId,
     },
     data: {
-      points: data.points,
+      totalPoints: {
+        increment: data.points,
+      }
     },
     select: {
       id: true,
-      name: true,
-      points: true,
+      title: true,
+      nickname: true,
+      totalPoints: true,
     },
   });
 
