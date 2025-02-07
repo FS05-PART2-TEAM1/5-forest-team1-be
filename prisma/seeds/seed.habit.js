@@ -1,0 +1,51 @@
+export const habits = [
+  {
+    studyId: "70c8c2ef-dca8-4667-924c-140cd339712b",
+    name: "미라클 모닝 6시 기상",
+    deletedAt: null,
+    createdAt: new Date("2024-01-01"),
+    updatedAt: new Date(),
+  },
+  {
+    studyId: "70c8c2ef-dca8-4667-924c-140cd339712b",
+    name: "아침 챙겨 먹기",
+    deletedAt: null,
+    createdAt: new Date("2024-01-01"),
+    updatedAt: new Date(),
+  },
+  {
+    studyId: "70c8c2ef-dca8-4667-924c-140cd339712b",
+    name: "React 스터디 책 1챕터 읽기",
+    deletedAt: null,
+    createdAt: new Date("2024-02-01"),
+    updatedAt: new Date(),
+  },
+  {
+    studyId: "70c8c2ef-dca8-4667-924c-140cd339712b",
+    name: "스트레칭",
+    deletedAt: null,
+    createdAt: new Date("2024-02-01"),
+    updatedAt: new Date(),
+  },
+  {
+    studyId: "70c8c2ef-dca8-4667-924c-140cd339712b",
+    name: "영양제 챙겨 먹기",
+    deletedAt: null,
+    createdAt: new Date("2024-03-01"),
+    updatedAt: new Date(),
+  },
+  {
+    studyId: "70c8c2ef-dca8-4667-924c-140cd339712b",
+    name: "사이드 프로젝트",
+    deletedAt: null,
+    createdAt: new Date("2024-03-01"),
+    updatedAt: new Date(),
+  },
+  {
+    studyId: "70c8c2ef-dca8-4667-924c-140cd339712b",
+    name: "물 2L 먹기",
+    deletedAt: null,
+    createdAt: new Date("2024-03-15"),
+    updatedAt: new Date(),
+  },
+];

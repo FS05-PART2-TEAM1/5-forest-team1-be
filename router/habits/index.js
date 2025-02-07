@@ -1,16 +1,18 @@
 import express from "express";
 import {
-  getHabits,
-  createHabit,
-  deleteHabit,
-  updateHabit,
+  fetchHabits,
+  addHabit,
+  modifyDailyHabitById,
+  modifyHabitById,
+  fetchHabitCheck,
 } from "./habit.controller.js";
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.get("/", getHabits);
-router.post("/", createHabit);
-router.delete("/:habitId", deleteHabit);
-router.patch("/:habitId", updateHabit);
+router.get("/", fetchHabits);
+router.post("/", addHabit);
+router.patch("/:habitId", modifyHabitById);
+router.post("/:habitId/check/today", modifyDailyHabitById);
+router.get("/:habitId/check", fetchHabitCheck);
 
 export default router;
