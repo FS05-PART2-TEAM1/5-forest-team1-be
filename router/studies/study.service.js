@@ -27,17 +27,17 @@ export const fetchAllStudies = async (
       orderBy.createdAt = "desc";
       break;
     case "mostPoints":
-      orderBy.point = "desc";
+      orderBy.totalPoints = "desc";
       break;
     case "leastPoints":
-      orderBy.point = "asc";
+      orderBy.totalPoints = "asc";
       break;
     default:
       orderBy.createdAt = "desc";
   }
 
-  const skip = (page - 1) * pageSize;
-  const take = pageSize;
+  const skip = (Number(page) - 1) * Number(pageSize);
+  const take = Number(pageSize);
 
   const studies = await prisma.study.findMany({
     where,
