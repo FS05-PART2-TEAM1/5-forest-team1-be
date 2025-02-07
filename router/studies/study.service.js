@@ -27,10 +27,10 @@ export const fetchAllStudies = async (
       orderBy.createdAt = "desc";
       break;
     case "mostPoints":
-      orderBy.points = "desc";
+      orderBy.totalPoints = "desc";
       break;
     case "leastPoints":
-      orderBy.points = "asc";
+      orderBy.totalPoints = "asc";
       break;
     default:
       orderBy.createdAt = "desc";
