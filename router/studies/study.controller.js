@@ -5,8 +5,8 @@ export const fetchAllStudies = async (req, res) => {
 
   try {
     const result = await studyService.fetchAllStudies(
-      page,
-      pageSize,
+      Number(page),
+      Number(pageSize),
       keyword,
       sortBy
     );
