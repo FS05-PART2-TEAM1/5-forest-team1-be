@@ -180,6 +180,7 @@ export const fetchStudyDetail = async (studyId) => {
   const study = await prisma.study.findUnique({
     where: { id: studyId },
     select: {
+      id: true,
       nickname: true,
       title: true,
       description: true,
