@@ -1,7 +1,4 @@
-GET http://localhost:5004/api/studies/9a1c0e3d-889b-47f1-90cd-75ccd7ab39d3/habits
-
-###
-GET http://localhost:5004/api/studies
+GET http://localhost:5004/api/studies/9a1c0e3d-889b-47f1-90cd-75ccd7ab39d3/habits?sortBy=date&start=2025-02-01&end=2025-02-07
 
 ###
 POST http://localhost:5004/api/studies/6a6046af-f969-48a2-9c29-317049140ecf/habits
