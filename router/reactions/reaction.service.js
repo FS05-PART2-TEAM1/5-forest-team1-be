@@ -26,7 +26,7 @@ const addReaction = async (data) => {
 const modifyReactionById = async ({ reactionId, counts }) => {
   return await prisma.reaction.update({
     where: { id: reactionId },
-    data: { counts },
+    data: { counts: { increment: counts } },
     select: {
       id: true,
       emoji: true,
