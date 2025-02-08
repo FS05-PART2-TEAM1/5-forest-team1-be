@@ -30,6 +30,11 @@ prisma.$use(async (params, next) => {
         break;
       case "update":
         params.args.data.updatedAt ??= nowKST;
+        if (params.model === "Habit") {
+          params.args.data.deletedAt = new Date(
+            params.args.data.deletedAt + KST_OFFSET
+          );
+        }
         break;
       case "upsert":
         if (params.args.create) {
