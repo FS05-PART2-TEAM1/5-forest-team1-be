@@ -19,12 +19,13 @@ prisma.$use(async (params, next) => {
       case "create":
         params.args.data.createdAt ??= nowKST;
         params.args.data.updatedAt ??= nowKST;
+
         if (params.model === "FocusPointLogs") {
           params.args.data.startedAt = new Date(
-            params.args.data.startedAt + KST_OFFSET
+            new Date(params.args.data.startedAt).getTime() + KST_OFFSET
           );
           params.args.data.finishedAt = new Date(
-            params.args.data.finishedAt + KST_OFFSET
+            new Date(params.args.data.finishedAt).getTime() + KST_OFFSET
           );
         }
         break;
@@ -32,7 +33,7 @@ prisma.$use(async (params, next) => {
         params.args.data.updatedAt ??= nowKST;
         if (params.model === "Habit") {
           params.args.data.deletedAt = new Date(
-            params.args.data.deletedAt + KST_OFFSET
+            new Date(params.args.data.deletedAt).getTime() + KST_OFFSET
           );
         }
         break;
@@ -42,7 +43,7 @@ prisma.$use(async (params, next) => {
           params.args.create.updatedAt ??= nowKST;
           if (params.model === "dailyHabitCheck") {
             params.args.data.date = new Date(
-              params.args.data.date + KST_OFFSET
+              new Date(params.args.data.date).getTime() + KST_OFFSET
             );
           }
         }
