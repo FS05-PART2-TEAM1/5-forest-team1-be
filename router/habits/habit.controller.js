@@ -1,4 +1,5 @@
 import habitService from "./habit.service.js";
+import { startOfWeek, endOfWeek } from "date-fns";
 
 export const fetchHabits = async (req, res) => {
   const { studyId } = req.params;
@@ -28,11 +29,11 @@ export const fetchHabits = async (req, res) => {
 const handleQueryParams = (start, end, sortBy) => {
   const startDate = start
     ? new Date(start).toISOString()
-    : new Date("2025-02-01").toISOString();
+    : startOfWeek(new Date(), { weekStartsOn: 1 }).toISOString(); // 이번 주 월요일 00:00:00
   const endDate = end
     ? new Date(end).toISOString()
-    : new Date("2025-02-07").toISOString();
-  const sortOrder = sortBy || "status"; // 기본값 'status'
+    : endOfWeek(new Date(), { weekStartsOn: 1 }).toISOString(); // 이번 주 일요일 23:59:59
+  const sortOrder = sortBy || "date"; // 기본 정렬 기준: 'status'
 
   return { startDate, endDate, sortOrder };
 };
