@@ -1,9 +1,10 @@
-PATCH http://localhost:5004/api/studies/hello/habits/4304305e-a782-4601-b0bb-f26ad2bcabc4/
+PATCH http://localhost:5004/api/studies/hello/habits/modify
 Content-Type: application/json
 
 {
-    "deletedAt": "2025-02-03T06:41:26.111Z"
+  "habits": [{"id":"73dae975-a226-4db3-9f56-d05e52fe21ff","name":"변경해봅시다1111"},{"id":"05c8302c-ea5a-46be-b07d-2df047e370fc","name":"변경해봅시다2222"},{"id":"4bd79067-896b-4daf-94ec-083288a3c954","name":"변경해봅시다3333"}]
 }
+
 
 ###
 POST http://localhost:5004/api/studies/hello/habits/test/check/today

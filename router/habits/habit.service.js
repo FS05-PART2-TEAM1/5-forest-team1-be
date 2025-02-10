@@ -59,16 +59,33 @@ const addHabit = async (studyId, name) => {
   });
 };
 
-const modifyHabitById = async (habitId, data) => {
-  const updatedHabit = await prisma.habit.update({
-    where: {
-      id: habitId,
-    },
-    data,
-  });
-  return updatedHabit;
-};
+const modifyHabits = async (data) => {
+  const habits = data.habits;
+  const result = [];
+  await Promise.all(
+    habits.map(async (habitElement) => {
+      if (habitElement.id) {
+        const isHabit = await prisma.habit.findUnique({
+          where: { id: habitElement.id },
+        });
 
+        if (isHabit) {
+          // update
+          result.push(await prisma.habit.update({
+            where: {
+              id: habitElement.id,
+            },
+            data: {
+              name: habitElement.name,
+              deletedAt: habitElement.deletedAt,
+            },
+          }))
+        }
+      }
+    })
+  );
+  return result;
+};
 const modifyDailyHabitCheck = async (habitId, status) => {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
@@ -119,7 +136,7 @@ const fetchHabitCheck = async (habitId, start, end) => {
 const habitService = {
   fetchHabits,
   addHabit,
-  modifyHabitById,
+  modifyHabits,
   modifyDailyHabitCheck,
   fetchHabitCheck,
 };
