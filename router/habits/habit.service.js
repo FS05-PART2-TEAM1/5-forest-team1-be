@@ -66,7 +66,7 @@ const modifyHabits = async (data) => {
     habits.map(async (habitElement) => {
       if (habitElement.id) {
         const isHabit = await prisma.habit.findUnique({
-          where: { id: habitElement.id },
+          where: { id: habitElement.id},
         });
 
         if (isHabit) {
@@ -82,11 +82,19 @@ const modifyHabits = async (data) => {
           }))
         }
       }
+      else if(habitElement.studyId) {
+        result.push(await prisma.habit.create({
+          data: {
+            studyId: habitElement.studyId,
+            name: habitElement.name,
+          }
+        }))
+      }
     })
   );
   return result;
 };
-const modifyDailyHabitCheck = async (habitId, status) => {
+  const modifyDailyHabitCheck = async (habitId, status) => {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const koreaTimeDiff = 9 * 60 * 60 * 1000;

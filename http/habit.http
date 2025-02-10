@@ -2,7 +2,7 @@ PATCH http://localhost:5004/api/studies/hello/habits/modify
 Content-Type: application/json
 
 {
-  "habits": [{"id":"73dae975-a226-4db3-9f56-d05e52fe21ff","name":"변경해봅시다1111"},{"id":"05c8302c-ea5a-46be-b07d-2df047e370fc","name":"변경해봅시다2222"},{"id":"4bd79067-896b-4daf-94ec-083288a3c954","name":"변경해봅시다3333"}]
+  "habits": [{"studyId":"testId","name":"hungry"},{"id":"73dae975-a226-4db3-9f56-d05e52fe21ff","name":"변경해봅시다1111","deletedAt":"2024-02-05T01:00:00.000Z"},{"id":"05c8302c-ea5a-46be-b07d-2df047e370fc","name":"변경해봅시다2222"},{"id":"4bd79067-896b-4daf-94ec-083288a3c954","name":"변경해봅시다3333"}]
 }
 
 
@@ -16,5 +16,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5004/api/studies/hello/habits/test/check?start=2025-02-04T00:00:00.000Z&end=2025-02-07T00:00:00.000Z
+GET http://localhost:5004/api/studies/hello/habits/test/check?start=2025-02-10T00:00:00.000Z&end=2025-02-10T00:00:00.000Z
 
