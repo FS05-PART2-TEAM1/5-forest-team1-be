@@ -34,7 +34,6 @@ const modifyDailyHabitCheck = async (habitId, status) => {
   const month = ("0" + (1 + korNow.getMonth())).slice(-2);
   const day = ("0" + korNow.getDate()).slice(-2);
   const today = `${year}-${month}-${day}`; // YYYY-MM-DD
-
   const dailyHabitCheck = await prisma.dailyHabitCheck.upsert({
     where: {
       habitId_date: {
