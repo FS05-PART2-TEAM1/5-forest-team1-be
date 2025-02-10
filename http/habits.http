@@ -1,13 +1,9 @@
-GET http://localhost:5004/api/studies/70c8c2ef-dca8-4667-924c-140cd339712b/habits
-
+GET http://localhost:5004/api/studies/9a1c0e3d-889b-47f1-90cd-75ccd7ab39d3/habits?sortBy=date
 ###
-GET http://localhost:5004/api/studies
-
-###
-POST http://localhost:5004/api/studies/ebc55fa0-5848-4471-afc1-5ad2657fafd1/habits
+POST http://localhost:5004/api/studies/6a6046af-f969-48a2-9c29-317049140ecf/habits
 Content-Type: application/json
 
 {
-  "studyId": "ebc55fa0-5848-4471-afc1-5ad2657fafd1",
-  "name": "Study Algorithms"
+  "studyId": "11267ffc-5899-4e8b-8117-7620ae5e9c27", 
+  "name": "파이썬 강의 듣기"
 }

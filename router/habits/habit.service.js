@@ -1,9 +1,53 @@
 import prisma from "../../prismaClient.js";
 
-const fetchHabits = async (studyId) => {
-  return await prisma.habit.findMany({
+const fetchHabits = async (
+  studyId,
+  start = new Date(),
+  end = new Date(),
+  sortBy = "date"
+) => {
+  // 습관 목록 가져오기
+  const habits = await prisma.habit.findMany({
     where: { studyId },
+    orderBy: { createdAt: "asc" }, //습관목록 기본정렬: 습관 생성 순 추가
   });
+
+  const habitIds = habits.map((habit) => habit.id);
+
+  // 쿼리 조건 설정
+  const orderBy =
+    sortBy === "date"
+      ? [{ date: "asc" }, { status: "desc" }]
+      : [{ status: "desc" }, { date: "asc" }];
+
+  const habitChecks = await prisma.dailyHabitCheck.findMany({
+    where: {
+      habitId: { in: habitIds },
+      date: {
+        gte: new Date(start),
+        lte: new Date(end),
+      },
+    },
+    orderBy,
+    select: {
+      habitId: true,
+      date: true,
+      status: true,
+    },
+  });
+
+  // 습관 목록에 dailyHabitCheck 데이터 매핑
+  const habitList = habits.map((habit) => ({
+    ...habit,
+    dailyHabitCheck: habitChecks
+      .filter((check) => check.habitId === habit.id)
+      .map((check) => ({
+        date: check.date,
+        status: check.status,
+      })),
+  }));
+
+  return habitList;
 };
 
 const addHabit = async (studyId, name) => {
