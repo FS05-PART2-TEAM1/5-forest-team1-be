@@ -13,6 +13,9 @@ const fetchHabits = async (
   });
 
   const habitIds = habits.map((habit) => habit.id);
+  // 날짜 범위 확인
+  console.log("Start Date:", new Date(start));
+  console.log("End Date:", new Date(end));
 
   // 쿼리 조건 설정
   const orderBy =

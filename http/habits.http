@@ -1,4 +1,4 @@
-GET http://localhost:5004/api/studies/9a1c0e3d-889b-47f1-90cd-75ccd7ab39d3/habits?sortBy=date
+GET https://five-forest-team1.onrender.com/api/studies?page=2
 ###
 POST http://localhost:5004/api/studies/6a6046af-f969-48a2-9c29-317049140ecf/habits
 Content-Type: application/json

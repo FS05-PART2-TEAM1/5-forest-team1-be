@@ -33,7 +33,7 @@ const handleQueryParams = (start, end, sortBy) => {
   const endDate = end
     ? new Date(end).toISOString()
     : endOfWeek(new Date(), { weekStartsOn: 1 }).toISOString(); // 이번 주 일요일 23:59:59
-  const sortOrder = sortBy || "date"; // 기본 정렬 기준: 'status'
+  const sortOrder = sortBy || "date"; // 기본 정렬 기준: 'date'  월요일 -> 일요일
 
   return { startDate, endDate, sortOrder };
 };
