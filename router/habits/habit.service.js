@@ -62,44 +62,75 @@ const addHabit = async (studyId, name) => {
   });
 };
 
-const modifyHabitById = async (habitId, data) => {
-  const updatedHabit = await prisma.habit.update({
-    where: {
-      id: habitId,
-    },
-    data,
-  });
-  return updatedHabit;
+const modifyHabits = async (data) => {
+  const habits = data.habits;
+  const result = [];
+  await Promise.all(
+    habits.map(async (habitElement) => {
+      if (habitElement.id) {
+        const isHabit = await prisma.habit.findUnique({
+          where: { id: habitElement.id },
+        });
+
+        if (isHabit) {
+          // update
+          result.push(
+            await prisma.habit.update({
+              where: {
+                id: habitElement.id,
+              },
+              data: {
+                name: habitElement.name,
+                deletedAt: habitElement.deletedAt,
+              },
+            })
+          );
+        }
+      } else if (habitElement.studyId) {
+        result.push(
+          await prisma.habit.create({
+            data: {
+              studyId: habitElement.studyId,
+              name: habitElement.name,
+            },
+          })
+        );
+      }
+    })
+  );
+  return result;
 };
 
-const modifyDailyHabitCheck = async (habitId, status) => {
+const modifyDailyHabitCheck = async (habitId, status, start ,end) => {
   const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
-  const koreaTimeDiff = 9 * 60 * 60 * 1000;
-  const korNow = new Date(utc + koreaTimeDiff);
-  const year = korNow.getFullYear();
-  const month = ("0" + (1 + korNow.getMonth())).slice(-2);
-  const day = ("0" + korNow.getDate()).slice(-2);
-  const today = `${year}-${month}-${day}`; // YYYY-MM-DD
-
-  const dailyHabitCheck = await prisma.dailyHabitCheck.upsert({
+  const dailyHabitCheck = await prisma.dailyHabitCheck.findFirst({
     where: {
-      habitId_date: {
-        habitId,
-        date: new Date(today),
-      },
-    },
-    update: {
-      date: new Date(today),
-      status,
-    },
-    create: {
       habitId,
-      date: new Date(today),
+      date: {
+        gte: new Date(start),
+        lte: new Date(end),
+      },
     },
   });
 
-  return dailyHabitCheck;
+  if(dailyHabitCheck){
+    return await prisma.dailyHabitCheck.update({
+      where: {
+        id: dailyHabitCheck.id,
+      },
+      data: {
+        status,
+        date: new Date(now),
+      }
+    })
+  } else {
+    return await prisma.dailyHabitCheck.create({
+      data: {
+        habitId,
+        date: new Date(now),
+      }
+    })
+  }
 };
 
 const fetchHabitCheck = async (habitId, start, end) => {
@@ -122,7 +153,7 @@ const fetchHabitCheck = async (habitId, start, end) => {
 const habitService = {
   fetchHabits,
   addHabit,
-  modifyHabitById,
+  modifyHabits,
   modifyDailyHabitCheck,
   fetchHabitCheck,
 };
