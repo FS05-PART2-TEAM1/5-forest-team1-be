@@ -78,12 +78,14 @@ export const modifyHabits = async (req, res) => {
 export const modifyDailyHabitById = async (req, res) => {
   try {
     const habitId = req.params.habitId;
-    const status = req.body.status;
-    if (!(status === true || status === false))
-      return res.status(400).send({ message: "status 형식 에러" });
+    const {status, start, end} = req.body;
+    if (!(status === true || status === false || !start || !end))
+      return res.status(400).send({ message: "body 형식 에러" });
     const dailyHabit = await habitService.modifyDailyHabitCheck(
       habitId,
-      status
+      status,
+      start,
+      end
     );
     res.status(200).send(dailyHabit);
   } catch (err) {

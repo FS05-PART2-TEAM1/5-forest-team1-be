@@ -44,6 +44,7 @@ export const addStudy = async (req, res) => {
     );
     res.status(201).send(result);
   } catch (err) {
+    console.log(err.message)
     res.status(500).send({ error: "스터디 생성에 실패했습니다." });
   }
 };
