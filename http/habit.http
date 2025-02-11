@@ -11,9 +11,7 @@ POST http://localhost:5004/api/studies/hello/habits/test3/check/today
 Content-Type: application/json
 
 {
-    "status":true,
-    "date":"2025-02-04",
-    "habitName":"잠자기"
+    "status":false
 }
 
 ###
