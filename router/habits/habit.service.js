@@ -98,19 +98,14 @@ const modifyHabits = async (data) => {
   return result;
 };
 
-const modifyDailyHabitCheck = async (habitId, status) => {
+const modifyDailyHabitCheck = async (habitId, status, start ,end) => {
   const now = new Date();
-  const start = new Date();
-  const end = new Date();
-  start.setHours(0, 0, 0, 0);
-  end.setHours(23, 59, 59, 999);
-
   const dailyHabitCheck = await prisma.dailyHabitCheck.findFirst({
     where: {
       habitId,
       date: {
-        gte: start,
-        lte: end,
+        gte: new Date(start),
+        lte: new Date(end),
       },
     },
   });
