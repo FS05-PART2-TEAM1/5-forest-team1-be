@@ -1,9 +1,53 @@
 import prisma from "../../prismaClient.js";
 
-const fetchHabits = async (studyId) => {
-  const habit = await prisma.habit.findMany({
+const fetchHabits = async (
+  studyId,
+  start = new Date(),
+  end = new Date(),
+  sortBy = "date"
+) => {
+  // 습관 목록 가져오기
+  const habits = await prisma.habit.findMany({
     where: { studyId },
+    orderBy: { createdAt: "asc" }, //습관목록 기본정렬: 습관 생성 순 추가
   });
+
+  const habitIds = habits.map((habit) => habit.id);
+
+  // 쿼리 조건 설정
+  const orderBy =
+    sortBy === "date"
+      ? [{ date: "asc" }, { status: "desc" }]
+      : [{ status: "desc" }, { date: "asc" }];
+
+  const habitChecks = await prisma.dailyHabitCheck.findMany({
+    where: {
+      habitId: { in: habitIds },
+      date: {
+        gte: new Date(start),
+        lte: new Date(end),
+      },
+    },
+    orderBy,
+    select: {
+      habitId: true,
+      date: true,
+      status: true,
+    },
+  });
+
+  // 습관 목록에 dailyHabitCheck 데이터 매핑
+  const habitList = habits.map((habit) => ({
+    ...habit,
+    dailyHabitCheck: habitChecks
+      .filter((check) => check.habitId === habit.id)
+      .map((check) => ({
+        date: check.date,
+        status: check.status,
+      })),
+  }));
+
+  return habitList;
 };
 
 const addHabit = async (studyId, name) => {
@@ -15,17 +59,42 @@ const addHabit = async (studyId, name) => {
   });
 };
 
-const modifyHabitById = async (habitId, data) => {
-  const updatedHabit = await prisma.habit.update({
-    where: {
-      id: habitId,
-    },
-    data,
-  });
-  return updatedHabit;
-};
+const modifyHabits = async (data) => {
+  const habits = data.habits;
+  const result = [];
+  await Promise.all(
+    habits.map(async (habitElement) => {
+      if (habitElement.id) {
+        const isHabit = await prisma.habit.findUnique({
+          where: { id: habitElement.id},
+        });
 
-const modifyDailyHabitCheck = async (habitId, status) => {
+        if (isHabit) {
+          // update
+          result.push(await prisma.habit.update({
+            where: {
+              id: habitElement.id,
+            },
+            data: {
+              name: habitElement.name,
+              deletedAt: habitElement.deletedAt,
+            },
+          }))
+        }
+      }
+      else if(habitElement.studyId) {
+        result.push(await prisma.habit.create({
+          data: {
+            studyId: habitElement.studyId,
+            name: habitElement.name,
+          }
+        }))
+      }
+    })
+  );
+  return result;
+};
+  const modifyDailyHabitCheck = async (habitId, status) => {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const koreaTimeDiff = 9 * 60 * 60 * 1000;
@@ -74,7 +143,7 @@ const fetchHabitCheck = async (habitId, start, end) => {
 const habitService = {
   fetchHabits,
   addHabit,
-  modifyHabitById,
+  modifyHabits,
   modifyDailyHabitCheck,
   fetchHabitCheck,
 };
