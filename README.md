@@ -1,8 +1,8 @@
-# Forest Team 1 Backend
+# Codeit Sprint Full-Stack 5기 1팀 백엔드
 
 ## 프로젝트 소개
 
-Forest 팀 프로젝트의 백엔드 서버입니다. 스터디 관리, 습관 체크, 리액션, 포인트 시스템 등의 기능을 제공합니다.
+Codeit Sprint Full-Stack 5기 1팀의 백엔드 서버입니다. 스터디 관리, 습관 체크, 리액션, 포인트 시스템 등의 기능을 제공합니다.
 
 ## 주요 기능
 
