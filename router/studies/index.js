@@ -1,24 +1,27 @@
 import express from "express";
 import {
-  getAllStudies,
-  createStudy,
-  getStudyById,
-  updateStudy,
-  deleteStudy,
-  getStudyPoints,
+  fetchAllStudies,
+  addStudy,
+  verifyPassword,
+  modifyStudy,
+  removeStudy,
+  fetchStudyDetail,
+  fetchRecentStudies,
 } from "./study.controller.js";
-import habitRouter from "../habits";
-import reactionRouter from "../reactions";
-import pointRouter from "../points";
+
+import habitRouter from "../habits/index.js";
+import reactionRouter from "../reactions/index.js";
+import pointRouter from "../points/index.js";
 
 const router = express.Router();
 
-router.get("/", getAllStudies);
-router.post("/", createStudy);
-router.get("/:studyId", getStudyById);
-router.patch("/:studyId", updateStudy);
-router.delete("/:studyId", deleteStudy);
-router.get("/:studyId/points", getStudyPoints);
+router.get("/", fetchAllStudies);
+router.post("/", addStudy);
+router.get("/recent", fetchRecentStudies);
+router.post("/verify-password", verifyPassword);
+router.get("/:studyId", fetchStudyDetail);
+router.patch("/:studyId", modifyStudy);
+router.delete("/:studyId", removeStudy);
 
 router.use("/:studyId/habits", habitRouter);
 router.use("/:studyId/reactions", reactionRouter);

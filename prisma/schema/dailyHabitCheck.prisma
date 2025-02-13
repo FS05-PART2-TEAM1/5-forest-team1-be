@@ -1,0 +1,16 @@
+model dailyHabitCheck {
+  id        String   @id @default(uuid())
+  habitId   String
+  date      DateTime 
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([habitId, date])
+  @@index([date, habitId])
+}
+
+/**
+ * const startDate = startOfWeek(new Date(), { weekStartsOn: 1 }); // 이번 주 월요일 00:00:00
+ * const endDate = endOfWeek(new Date(), { weekStartsOn: 1 }); // 이번 주 일요일 23:59:59
+ */

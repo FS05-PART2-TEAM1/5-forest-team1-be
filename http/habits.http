@@ -1,0 +1,9 @@
+GET http://localhost:5004/api/studies/9a1c0e3d-889b-47f1-90cd-75ccd7ab39d3/habits?sortBy=date
+###
+POST http://localhost:5004/api/studies/6a6046af-f969-48a2-9c29-317049140ecf/habits
+Content-Type: application/json
+
+{
+  "studyId": "11267ffc-5899-4e8b-8117-7620ae5e9c27", 
+  "name": "파이썬 강의 듣기"
+}
