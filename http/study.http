@@ -1,0 +1,8 @@
+GET http://localhost:5004/api/studies/785c2c67-3d42-423f-a7a9-5d574f6bccaa
+
+###
+
+POST http://localhost:5004/api/studies/
+Content-Type: application/json
+
+{ "nickname": "동혁 스터디", "title" : "스터디 타이틀", "password": "12345", "passwordConfirm": "12345", "description": "스터디 설명", "backgroundType": "color", "backgroundContent": "yellow"}

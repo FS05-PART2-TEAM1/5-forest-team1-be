@@ -2,7 +2,7 @@ import studyService from "./study.service.js";
 
 /// 스터디 목록 조회
 export const fetchAllStudies = async (req, res) => {
-  const { page, pageSize, keyword, sortBy } = req.query;
+  const { page = 1, pageSize = 6, keyword, sortBy } = req.query;
 
   try {
     const result = await studyService.fetchAllStudies(
@@ -44,6 +44,7 @@ export const addStudy = async (req, res) => {
     );
     res.status(201).send(result);
   } catch (err) {
+    console.log(err.message)
     res.status(500).send({ error: "스터디 생성에 실패했습니다." });
   }
 };
