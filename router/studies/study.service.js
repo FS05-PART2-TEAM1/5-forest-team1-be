@@ -144,13 +144,15 @@ export const removeStudy = async (studyId) => {
 };
 
 /// 스터디 수정
+/// 스터디 수정
 export const modifyStudy = async (
   studyId,
   nickname,
   title,
   description,
   backgroundType,
-  backgroundContent
+  backgroundContent,
+  password
 ) => {
   const modifyData = {};
   if (nickname) modifyData.nickname = nickname;
@@ -158,7 +160,7 @@ export const modifyStudy = async (
   if (description) modifyData.description = description;
   if (backgroundType) modifyData.backgroundType = backgroundType;
   if (backgroundContent) modifyData.backgroundContent = backgroundContent;
-
+  if (password) modifyData.password = password;
   const result = await prisma.study.update({
     where: { id: studyId },
     data: modifyData,
