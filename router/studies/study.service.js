@@ -144,7 +144,6 @@ export const removeStudy = async (studyId) => {
 };
 
 /// 스터디 수정
-/// 스터디 수정
 export const modifyStudy = async (
   studyId,
   nickname,
