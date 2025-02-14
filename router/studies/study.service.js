@@ -153,16 +153,18 @@ export const modifyStudy = async (
   backgroundContent,
   password
 ) => {
-  /// 비밀번호 해싱 처리 (saltRounds = 10)
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   const modifyData = {};
+
   if (nickname) modifyData.nickname = nickname;
   if (title) modifyData.title = title;
   if (description) modifyData.description = description;
   if (backgroundType) modifyData.backgroundType = backgroundType;
   if (backgroundContent) modifyData.backgroundContent = backgroundContent;
-  if (password) modifyData.password = hashedPassword;
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    modifyData.password = hashedPassword;
+  }
+
   const result = await prisma.study.update({
     where: { id: studyId },
     data: modifyData,
