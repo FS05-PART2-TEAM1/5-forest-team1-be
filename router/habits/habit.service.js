@@ -13,9 +13,6 @@ const fetchHabits = async (
   });
 
   const habitIds = habits.map((habit) => habit.id);
-  // 날짜 범위 확인
-  console.log("Start Date:", new Date(start));
-  console.log("End Date:", new Date(end));
 
   // 쿼리 조건 설정
   const orderBy =
@@ -101,7 +98,7 @@ const modifyHabits = async (data) => {
   return result;
 };
 
-const modifyDailyHabitCheck = async (habitId, status, start ,end) => {
+const modifyDailyHabitCheck = async (habitId, status, start, end) => {
   const now = new Date();
   const dailyHabitCheck = await prisma.dailyHabitCheck.findFirst({
     where: {
@@ -113,7 +110,7 @@ const modifyDailyHabitCheck = async (habitId, status, start ,end) => {
     },
   });
 
-  if(dailyHabitCheck){
+  if (dailyHabitCheck) {
     return await prisma.dailyHabitCheck.update({
       where: {
         id: dailyHabitCheck.id,
@@ -121,15 +118,15 @@ const modifyDailyHabitCheck = async (habitId, status, start ,end) => {
       data: {
         status,
         date: new Date(now),
-      }
-    })
+      },
+    });
   } else {
     return await prisma.dailyHabitCheck.create({
       data: {
         habitId,
         date: new Date(now),
-      }
-    })
+      },
+    });
   }
 };
 
