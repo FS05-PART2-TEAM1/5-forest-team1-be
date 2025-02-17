@@ -150,14 +150,20 @@ export const modifyStudy = async (
   title,
   description,
   backgroundType,
-  backgroundContent
+  backgroundContent,
+  password
 ) => {
   const modifyData = {};
+
   if (nickname) modifyData.nickname = nickname;
   if (title) modifyData.title = title;
   if (description) modifyData.description = description;
   if (backgroundType) modifyData.backgroundType = backgroundType;
   if (backgroundContent) modifyData.backgroundContent = backgroundContent;
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    modifyData.password = hashedPassword;
+  }
 
   const result = await prisma.study.update({
     where: { id: studyId },

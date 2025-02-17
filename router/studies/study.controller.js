@@ -44,7 +44,7 @@ export const addStudy = async (req, res) => {
     );
     res.status(201).send(result);
   } catch (err) {
-    console.log(err.message)
+    console.log(err.message);
     res.status(500).send({ error: "스터디 생성에 실패했습니다." });
   }
 };
@@ -84,8 +84,21 @@ export const verifyPassword = async (req, res) => {
 /// 스터디 수정
 export const modifyStudy = async (req, res) => {
   const { studyId } = req.params;
-  const { nickname, title, description, backgroundType, backgroundContent } =
-    req.body;
+  const {
+    nickname,
+    title,
+    description,
+    backgroundType,
+    backgroundContent,
+    password,
+    passwordConfirm,
+  } = req.body;
+
+  if (password || passwordConfirm) {
+    if (password !== passwordConfirm) {
+      return res.status(400).send({ error: "비밀번호가 일치하지 않습니다." });
+    }
+  }
 
   try {
     const result = await studyService.modifyStudy(
@@ -94,13 +107,15 @@ export const modifyStudy = async (req, res) => {
       title,
       description,
       backgroundType,
-      backgroundContent
+      backgroundContent,
+      password
     );
 
     if (!result) {
       return res.status(404).send({ error: "스터디를 찾을 수 없습니다." });
     }
-    const { password, ...studyWithoutPassword } = result;
+
+    const { password: _, ...studyWithoutPassword } = result;
 
     return res.status(200).send({
       message: "스터디가 성공적으로 수정되었습니다.",

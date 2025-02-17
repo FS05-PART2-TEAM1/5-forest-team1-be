@@ -1,5 +1,6 @@
 export const studies = [
   {
+    id: "c3b1569b-b09e-47f1-8d85-328d5fca1f4b",
     nickname: "알고리즘마스터",
     title: "알고리즘 스터디",
     password: "password123",
@@ -24,6 +25,7 @@ export const studies = [
     ],
   },
   {
+    id: "eb119bc0-57d9-4c6c-ad2b-1c3c05a7d12f",
     nickname: "리액트개발자",
     title: "리액트 스터디",
     password: "password123",
@@ -52,6 +54,7 @@ export const studies = [
     ],
   },
   {
+    id: "fc3fd371-291a-40aa-9a5b-79e6216eabf8",
     nickname: "파이썬초보",
     title: "파이썬 기초 스터디",
     password: "password123",
@@ -72,6 +75,7 @@ export const studies = [
     ],
   },
   {
+    id: "aecefe02-ffb8-4548-bfb0-5bd341329ac6",
     nickname: "코테준비생",
     title: "코딩 테스트 대비",
     password: "password123",
@@ -92,6 +96,7 @@ export const studies = [
     ],
   },
   {
+    id: "58c5cdcd-3ffd-4e9a-9112-6ad010c20424",
     nickname: "자바스크립트고수",
     title: "자바스크립트 심화",
     password: "password123",
@@ -120,6 +125,7 @@ export const studies = [
     ],
   },
   {
+    id: "88a21091-479f-46bf-8022-7b342ca750b0",
     nickname: "DB마스터",
     title: "데이터베이스 실습",
     password: "password123",
@@ -144,6 +150,7 @@ export const studies = [
     ],
   },
   {
+    id: "a65e3004-0bca-4bd6-bafe-e1141e708462",
     nickname: "보안전문가",
     title: "웹 보안 스터디",
     password: "password123",

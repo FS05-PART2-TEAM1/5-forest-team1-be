@@ -10,14 +10,10 @@ async function main() {
   await prisma.habit.deleteMany({});
   await prisma.dailyHabitCheck.deleteMany({});
 
-  for (const dailyHabitCheck of dailyHabitChecks) {
-    await prisma.dailyHabitCheck.create({
-      data: dailyHabitCheck,
-    });
-  }
-
+  // 1️⃣ Habit 먼저 생성 (중복 방지)
+  const createdHabits = {};
   for (const habit of habits) {
-    const existingHabit = await prisma.habit.findFirst({
+    let existingHabit = await prisma.habit.findFirst({
       where: {
         studyId: habit.studyId,
         name: habit.name,
@@ -25,17 +21,28 @@ async function main() {
     });
 
     if (!existingHabit) {
-      // If not found, insert the habit
-      await prisma.habit.create({
-        data: habit,
-      });
+      const { dailyHabitCheck, ...habitData } = habit; // 🔥 dailyHabitCheck 제거
+      existingHabit = await prisma.habit.create({ data: habitData });
     }
+
+    // 생성된 habit을 저장
+    createdHabits[existingHabit.id] = existingHabit;
   }
 
-  for (const habit of habits) {
-    await prisma.habit.create({
-      data: habit,
-    });
+  // 2️⃣ DailyHabitCheck 생성 (habitId 매칭)
+  for (const dailyHabitCheck of dailyHabitChecks) {
+    const habitId = createdHabits[dailyHabitCheck.habitId]; // habitId를 직접 사용
+
+    if (habitId) {
+      await prisma.dailyHabitCheck.create({
+        data: {
+          ...dailyHabitCheck,
+          habitId: habitId.id, // 유효한 habitId 삽입
+        },
+      });
+    } else {
+      console.warn(`⚠️ 매칭되는 Habit이 없습니다: ${dailyHabitCheck.habitId}`);
+    }
   }
 
   for (const study of studies) {
