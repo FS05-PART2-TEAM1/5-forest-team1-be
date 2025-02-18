@@ -13,7 +13,7 @@ app.use(cors());
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://sprint-forest-fe.netlify.app/",
+    origin: "https://sprint-forest-fe.netlify.app",
     // origin: "http://localhost:5173",
     methods: ["GET", "POST"],
     // credentials: true,
@@ -66,8 +66,8 @@ app.get("/public/chatroom", (req, res) => {
 // 정적 파일 제공 (채팅 페이지 경로)
 app.use(express.static("public"));
 // app.use(express.static(path.join(__dirname, "public", "chatroom")));
-const PORT = 8000;
-// const PORT = process.env.PORT || 8000;
+// const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   // console.log(`WebSocket 서버 실행 중: ws://localhost:${socketPort}`);
