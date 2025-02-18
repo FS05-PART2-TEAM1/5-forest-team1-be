@@ -13,7 +13,7 @@ app.use(cors());
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://sprint-forest-fe.netlify.app/",
+    origin: "https://sprint-forest-fe.netlify.app",
     // origin: "http://localhost:5173",
     methods: ["GET", "POST"],
     // credentials: true,
