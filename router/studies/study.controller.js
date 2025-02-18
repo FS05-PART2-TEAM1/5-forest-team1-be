@@ -84,6 +84,7 @@ export const verifyPassword = async (req, res) => {
 /// 스터디 수정
 export const modifyStudy = async (req, res) => {
   const { studyId } = req.params;
+  console.log(studyId);
   const {
     nickname,
     title,
@@ -93,6 +94,7 @@ export const modifyStudy = async (req, res) => {
     password,
     passwordConfirm,
   } = req.body;
+  console.log(req.body);
 
   if (password || passwordConfirm) {
     if (password !== passwordConfirm) {
@@ -108,7 +110,8 @@ export const modifyStudy = async (req, res) => {
       description,
       backgroundType,
       backgroundContent,
-      password
+      password,
+      passwordConfirm
     );
 
     if (!result) {
@@ -116,7 +119,7 @@ export const modifyStudy = async (req, res) => {
     }
 
     const { password: _, ...studyWithoutPassword } = result;
-
+    console.log(result);
     return res.status(200).send({
       message: "스터디가 성공적으로 수정되었습니다.",
       study: studyWithoutPassword,

@@ -2,7 +2,20 @@ GET http://localhost:5004/api/studies/785c2c67-3d42-423f-a7a9-5d574f6bccaa
 
 ###
 
-POST http://localhost:5004/api/studies/
+PATCH https://five-forest-team1.onrender.com/api/studies/811d1600-03e9-4598-bcd3-71f15c3eef7b
 Content-Type: application/json
 
-{ "nickname": "동혁 스터디", "title" : "스터디 타이틀", "password": "12345", "passwordConfirm": "12345", "description": "스터디 설명", "backgroundType": "color", "backgroundContent": "yellow"}
+{
+  "nickname": " 스터디",
+  "title": "스터디 타이틀",
+  "password": "123456",
+  "passwordConfirm" : "123456",
+  "description": "스터디 설명",
+  "backgroundType": "color",
+  "backgroundContent": "yellow"
+}
+
+###
+DELETE http://five-forest-team1.onrender.com/api/studies/4f7634a7-dfe0-4926-be90-1fda696bf889
+Content-Type: application/json
+
